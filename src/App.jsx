@@ -209,13 +209,10 @@ export default function App() {
     
     // FETCHING SECURE ENVIRONMENT VARIABLES FROM VERCEL
     // NOTE: Uncomment the three lines below when deploying to Vercel.
-    // const serviceId = import.meta.env.VITE_EMAILJS_SERVICE_ID; 
-    // const templateId = import.meta.env.VITE_EMAILJS_TEMPLATE_ID;
-    // const publicKey = import.meta.env.VITE_EMAILJS_PUBLIC_KEY;
+    const serviceId = import.meta.env.VITE_EMAILJS_SERVICE_ID; 
+    const templateId = import.meta.env.VITE_EMAILJS_TEMPLATE_ID;
+    const publicKey = import.meta.env.VITE_EMAILJS_PUBLIC_KEY;
     
-    const serviceId = 'service_bvptl1g'; 
-    const templateId = 'template_q9d2t3t';
-    const publicKey = 'jMeHyyiKaYCLnBG4o';
 
     // Safety check - helps debug if .env file isn't loaded properly
     if (!serviceId || !templateId || !publicKey) {
