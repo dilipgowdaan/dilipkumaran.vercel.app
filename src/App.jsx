@@ -2,11 +2,9 @@ import React, { useState, useEffect } from 'react';
 import { 
   Github, Linkedin, Mail, MapPin, 
   Terminal, Cpu, Monitor, Zap, GraduationCap, 
-  ChevronRight, Send, CheckCircle, XCircle,
+  ChevronRight, Send, CheckCircle, XCircle, Download,
   Database, Smartphone, Server, Briefcase, Code
 } from 'lucide-react';
-
-// --- DATA STRUCTURES ---
 
 const softwareProjects = [
   {
@@ -15,9 +13,9 @@ const softwareProjects = [
     tags: ["React", "Firebase", "LLMs", "Vercel"],
     desc: "A complete Hospital Management System featuring an AI-powered health assistant that analyzes symptoms. Implemented secure cloud architecture and real-time status updates.",
     images: [
-      "https://images.unsplash.com/photo-1576091160550-2173ff9e5ee5?q=80&w=800&auto=format&fit=crop",
-      "https://images.unsplash.com/photo-1551288049-bebda4e38f71?q=80&w=800&auto=format&fit=crop",
-      "https://images.unsplash.com/photo-1504868584819-f8e8b4b6d7e3?q=80&w=800&auto=format&fit=crop"
+      "[https://images.unsplash.com/photo-1576091160550-2173ff9e5ee5?q=80&w=800&auto=format&fit=crop](https://images.unsplash.com/photo-1576091160550-2173ff9e5ee5?q=80&w=800&auto=format&fit=crop)",
+      "[https://images.unsplash.com/photo-1551288049-bebda4e38f71?q=80&w=800&auto=format&fit=crop](https://images.unsplash.com/photo-1551288049-bebda4e38f71?q=80&w=800&auto=format&fit=crop)",
+      "[https://images.unsplash.com/photo-1504868584819-f8e8b4b6d7e3?q=80&w=800&auto=format&fit=crop](https://images.unsplash.com/photo-1504868584819-f8e8b4b6d7e3?q=80&w=800&auto=format&fit=crop)"
     ]
   },
   {
@@ -26,9 +24,9 @@ const softwareProjects = [
     tags: ["Full-Stack", "Leaflet.js", "SQL"],
     desc: "Hyper-Local Agri-Marketplace connecting farmers and buyers. Integrated dynamic CRUD, geolocation search, and automated stock updates with multi-language support.",
     images: [
-      "https://images.unsplash.com/photo-1622383563227-04401ab4e5ea?q=80&w=800&auto=format&fit=crop",
-      "https://images.unsplash.com/photo-1551288049-bebda4e38f71?q=80&w=800&auto=format&fit=crop",
-      "https://images.unsplash.com/photo-1492011221367-f47e3ccd77a0?q=80&w=800&auto=format&fit=crop"
+      "[https://images.unsplash.com/photo-1622383563227-04401ab4e5ea?q=80&w=800&auto=format&fit=crop](https://images.unsplash.com/photo-1622383563227-04401ab4e5ea?q=80&w=800&auto=format&fit=crop)",
+      "[https://images.unsplash.com/photo-1551288049-bebda4e38f71?q=80&w=800&auto=format&fit=crop](https://images.unsplash.com/photo-1551288049-bebda4e38f71?q=80&w=800&auto=format&fit=crop)",
+      "[https://images.unsplash.com/photo-1492011221367-f47e3ccd77a0?q=80&w=800&auto=format&fit=crop](https://images.unsplash.com/photo-1492011221367-f47e3ccd77a0?q=80&w=800&auto=format&fit=crop)"
     ]
   },
   {
@@ -37,9 +35,9 @@ const softwareProjects = [
     tags: ["React Native", "Geo-Location", "IoT"],
     desc: "Intelligent Waste Collection Platform with Live Tracking. Geo-enabled urban waste management app featuring role-based control and real-time fleet monitoring.",
     images: [
-      "https://images.unsplash.com/photo-1519389950473-47ba0277781c?q=80&w=800&auto=format&fit=crop",
-      "https://images.unsplash.com/photo-1524661135-423995f22d0b?q=80&w=800&auto=format&fit=crop",
-      "https://images.unsplash.com/photo-1605810230434-7631ac76ec81?q=80&w=800&auto=format&fit=crop"
+      "[https://images.unsplash.com/photo-1519389950473-47ba0277781c?q=80&w=800&auto=format&fit=crop](https://images.unsplash.com/photo-1519389950473-47ba0277781c?q=80&w=800&auto=format&fit=crop)",
+      "[https://images.unsplash.com/photo-1524661135-423995f22d0b?q=80&w=800&auto=format&fit=crop](https://images.unsplash.com/photo-1524661135-423995f22d0b?q=80&w=800&auto=format&fit=crop)",
+      "[https://images.unsplash.com/photo-1605810230434-7631ac76ec81?q=80&w=800&auto=format&fit=crop](https://images.unsplash.com/photo-1605810230434-7631ac76ec81?q=80&w=800&auto=format&fit=crop)"
     ]
   }
 ];
@@ -51,9 +49,9 @@ const hardwareProjects = [
     tags: ["Hardware", "Supabase", "React"],
     desc: "Grid integrated PV System with Weather Forecast Analysis. Hardware-integrated production grade system managed via a full-stack Vercel hosted dashboard and mobile app.",
     images: [
-      "https://images.unsplash.com/photo-1509391366360-1e97d5259d81?q=80&w=800&auto=format&fit=crop",
-      "https://images.unsplash.com/photo-1551288049-bebda4e38f71?q=80&w=800&auto=format&fit=crop",
-      "https://images.unsplash.com/photo-1518770660439-4636190af475?q=80&w=800&auto=format&fit=crop"
+      "[https://images.unsplash.com/photo-1509391366360-1e97d5259d81?q=80&w=800&auto=format&fit=crop](https://images.unsplash.com/photo-1509391366360-1e97d5259d81?q=80&w=800&auto=format&fit=crop)",
+      "[https://images.unsplash.com/photo-1551288049-bebda4e38f71?q=80&w=800&auto=format&fit=crop](https://images.unsplash.com/photo-1551288049-bebda4e38f71?q=80&w=800&auto=format&fit=crop)",
+      "[https://images.unsplash.com/photo-1518770660439-4636190af475?q=80&w=800&auto=format&fit=crop](https://images.unsplash.com/photo-1518770660439-4636190af475?q=80&w=800&auto=format&fit=crop)"
     ]
   },
   {
@@ -62,9 +60,9 @@ const hardwareProjects = [
     tags: ["VLSI", "System Verilog", "Vedic Math"],
     desc: "Formal and Functional Verification of a high-performance 32-bit ALU using a Vedic multiplier (Urdhva-Tiryagbhyam), ensuring absolute accuracy and reliability.",
     images: [
-      "https://images.unsplash.com/photo-1518932945647-7a3c96922221?q=80&w=800&auto=format&fit=crop",
-      "https://images.unsplash.com/photo-1591799264318-7e6ef8ddb7ea?q=80&w=800&auto=format&fit=crop",
-      "https://images.unsplash.com/photo-1555680202-c86f0e12f086?q=80&w=800&auto=format&fit=crop"
+      "[https://images.unsplash.com/photo-1518932945647-7a3c96922221?q=80&w=800&auto=format&fit=crop](https://images.unsplash.com/photo-1518932945647-7a3c96922221?q=80&w=800&auto=format&fit=crop)",
+      "[https://images.unsplash.com/photo-1591799264318-7e6ef8ddb7ea?q=80&w=800&auto=format&fit=crop](https://images.unsplash.com/photo-1591799264318-7e6ef8ddb7ea?q=80&w=800&auto=format&fit=crop)",
+      "[https://images.unsplash.com/photo-1555680202-c86f0e12f086?q=80&w=800&auto=format&fit=crop](https://images.unsplash.com/photo-1555680202-c86f0e12f086?q=80&w=800&auto=format&fit=crop)"
     ]
   },
   {
@@ -73,14 +71,12 @@ const hardwareProjects = [
     tags: ["Embedded Control", "Robotics"],
     desc: "Designed and implemented a robotic arm system with precise control mechanisms suitable for planetary exploration and object handling.",
     images: [
-      "https://images.unsplash.com/photo-1485827404703-89b55fcc595e?q=80&w=800&auto=format&fit=crop",
-      "https://images.unsplash.com/photo-1531746790731-6c087fecd65a?q=80&w=800&auto=format&fit=crop",
-      "https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?q=80&w=800&auto=format&fit=crop"
+      "[https://images.unsplash.com/photo-1485827404703-89b55fcc595e?q=80&w=800&auto=format&fit=crop](https://images.unsplash.com/photo-1485827404703-89b55fcc595e?q=80&w=800&auto=format&fit=crop)",
+      "[https://images.unsplash.com/photo-1531746790731-6c087fecd65a?q=80&w=800&auto=format&fit=crop](https://images.unsplash.com/photo-1531746790731-6c087fecd65a?q=80&w=800&auto=format&fit=crop)",
+      "[https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?q=80&w=800&auto=format&fit=crop](https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?q=80&w=800&auto=format&fit=crop)"
     ]
   }
 ];
-
-// --- REUSABLE UI COMPONENTS ---
 
 const SectionLabel = ({ text, delay = "0s", icon: Icon }) => (
   <div className="flex items-center gap-4 mb-8 animate-fade-in-up" style={{ animationDelay: delay, animationFillMode: 'both' }}>
@@ -91,7 +87,6 @@ const SectionLabel = ({ text, delay = "0s", icon: Icon }) => (
   </div>
 );
 
-// Custom Accordion Project Card with Slideshow
 const ProjectCard = ({ project, isHovered, onMouseEnter, onMouseLeave }) => {
   const [imgIdx, setImgIdx] = useState(0);
 
@@ -174,19 +169,14 @@ const ProjectRow = ({ projects }) => {
   );
 };
 
-
-// --- MAIN APPLICATION COMPONENT ---
-
-export default function Portfolio() {
+export default function App() {
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
   const [activeSection, setActiveSection] = useState('home');
 
-  // Contact Form State
   const [formData, setFormData] = useState({ name: '', email: '', message: '' });
   const [submitStatus, setSubmitStatus] = useState('idle'); 
 
   useEffect(() => {
-    // Mouse movement tracker for background blob
     const handleMouseMove = (e) => {
       setMousePosition({
         x: (e.clientX / window.innerWidth - 0.5) * 20,
@@ -195,7 +185,6 @@ export default function Portfolio() {
     };
     window.addEventListener('mousemove', handleMouseMove);
 
-    // Scroll Observer to update header links dynamically
     const observer = new IntersectionObserver((entries) => {
       entries.forEach(entry => {
         if (entry.isIntersecting) {
@@ -216,17 +205,19 @@ export default function Portfolio() {
     e.preventDefault();
     setSubmitStatus('submitting');
     
-    // EmailJS Credentials
-    const serviceId = 'YOUR_SERVICE_ID'; 
-    const templateId = 'YOUR_TEMPLATE_ID';
-    const publicKey = 'YOUR_PUBLIC_KEY';
+    // FETCHING SECURE ENVIRONMENT VARIABLES FROM VERCEL
+    const serviceId = import.meta.env.VITE_EMAILJS_SERVICE_ID; 
+    const templateId = import.meta.env.VITE_EMAILJS_TEMPLATE_ID;
+    const publicKey = import.meta.env.VITE_EMAILJS_PUBLIC_KEY;
 
     try {
-      const response = await fetch('https://api.emailjs.com/api/v1.0/email/send', {
+      const response = await fetch('[https://api.emailjs.com/api/v1.0/email/send](https://api.emailjs.com/api/v1.0/email/send)', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
-          service_id: serviceId, template_id: templateId, user_id: publicKey,
+          service_id: serviceId, 
+          template_id: templateId, 
+          user_id: publicKey,
           template_params: { 
             from_name: formData.name, 
             from_email: formData.email, 
@@ -255,18 +246,15 @@ export default function Portfolio() {
   ];
 
   return (
-    // Relative container with padding bottom to accommodate fixed footer
-    <div className="min-h-screen bg-[#050505] text-zinc-300 font-sans selection:bg-indigo-500/30 selection:text-indigo-200 relative pb-[40px]">
+    <div className="min-h-screen bg-[#050505] text-zinc-300 font-sans selection:bg-indigo-500/30 selection:text-indigo-200 relative pb-[40px] custom-scrollbar">
       
-      {/* Animated Ambient Background (Fixed behind everything) */}
       <div className="fixed inset-0 z-0 pointer-events-none">
         <div className="absolute top-[-10%] left-[-10%] w-[500px] h-[500px] bg-indigo-600/20 rounded-full mix-blend-screen filter blur-[100px] opacity-50 animate-blob" style={{ transform: `translate(${mousePosition.x}px, ${mousePosition.y}px)` }} />
         <div className="absolute top-[20%] right-[-10%] w-[400px] h-[400px] bg-emerald-600/10 rounded-full mix-blend-screen filter blur-[100px] opacity-50 animate-blob animation-delay-2000" style={{ transform: `translate(${-mousePosition.x}px, ${-mousePosition.y}px)` }} />
         <div className="absolute bottom-[-20%] left-[20%] w-[600px] h-[600px] bg-purple-600/10 rounded-full mix-blend-screen filter blur-[120px] opacity-40 animate-blob animation-delay-4000" />
-        <div className="absolute inset-0 bg-[url('https://grainy-gradients.vercel.app/noise.svg')] opacity-20 mix-blend-overlay"></div>
+        <div className="absolute inset-0 bg-[url('[https://grainy-gradients.vercel.app/noise.svg](https://grainy-gradients.vercel.app/noise.svg)')] opacity-20 mix-blend-overlay"></div>
       </div>
 
-      {/* --- IMMOVABLE HEADER --- */}
       <header className="fixed top-0 left-0 right-0 z-50 bg-[#050505]/90 backdrop-blur-xl border-b border-zinc-800/80 shadow-lg py-4 px-6 h-[72px]">
         <div className="max-w-6xl mx-auto flex items-center justify-between h-full">
           <a href="#home" className="flex items-center gap-3 cursor-pointer group focus:outline-none">
@@ -304,11 +292,8 @@ export default function Portfolio() {
         </div>
       </header>
 
-      {/* --- MAIN CONTINUOUS SCROLL CONTENT --- */}
-      {/* pt-[72px] perfectly clears the fixed header height without extra massive gaps */}
       <main className="relative z-10 w-full pt-[72px] flex flex-col items-center">
         
-        {/* HERO SECTION */}
         <section id="home" className="w-full max-w-6xl mx-auto px-6 pt-12 pb-20 scroll-mt-[72px]">
           <div className="space-y-6 animate-fade-in-up">
             <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-zinc-900/50 border border-emerald-500/30 backdrop-blur-md w-fit">
@@ -333,17 +318,19 @@ export default function Portfolio() {
             </p>
 
             <div className="flex flex-wrap items-center gap-5 pt-6">
+              <a href="/Dilip_Kumar_CV.pdf" download="Dilip_Kumar_CV.pdf" className="h-12 px-8 rounded-xl bg-indigo-500 text-white font-bold flex items-center gap-2 hover:bg-indigo-400 hover:scale-105 active:scale-95 transition-all shadow-[0_0_20px_rgba(99,102,241,0.3)]">
+                <Download size={18} /> Download CV
+              </a>
               <a href="#contact" className="h-12 px-8 rounded-xl bg-zinc-100 text-zinc-950 font-bold flex items-center gap-2 hover:bg-white hover:scale-105 active:scale-95 transition-all shadow-[0_0_20px_rgba(255,255,255,0.2)]">
                 <Mail size={18} /> Get in Touch
               </a>
-              <a href="https://github.com/dilipgowdaan" target="_blank" rel="noreferrer" className="h-12 px-8 rounded-xl bg-zinc-900/50 backdrop-blur-md border border-zinc-700 text-zinc-100 font-medium flex items-center gap-2 hover:bg-zinc-800 transition-all">
+              <a href="[https://github.com/dilipgowdaan](https://github.com/dilipgowdaan)" target="_blank" rel="noreferrer" className="h-12 px-8 rounded-xl bg-zinc-900/50 backdrop-blur-md border border-zinc-700 text-zinc-100 font-medium flex items-center gap-2 hover:bg-zinc-800 transition-all">
                 <Github size={18} /> GitHub Profile
               </a>
             </div>
           </div>
         </section>
 
-        {/* EXPERIENCE SECTION */}
         <section id="experience" className="w-full max-w-5xl mx-auto px-6 py-16 scroll-mt-[72px]">
           <div className="animate-fade-in-up w-full">
             <SectionLabel text="Professional Experience" icon={Briefcase} delay="0.1s" />
@@ -367,7 +354,6 @@ export default function Portfolio() {
           </div>
         </section>
 
-        {/* PROJECTS SECTION */}
         <section id="projects" className="w-full max-w-7xl mx-auto px-6 py-16 space-y-16 scroll-mt-[72px]">
           <div>
             <SectionLabel text="Software & Full-Stack Projects" icon={Code} delay="0.1s" />
@@ -384,7 +370,6 @@ export default function Portfolio() {
           </div>
         </section>
 
-        {/* SKILLS & EDUCATION SECTION */}
         <section id="skills" className="w-full max-w-6xl mx-auto px-6 py-16 space-y-16 scroll-mt-[72px]">
           <div className="animate-fade-in-up">
             <SectionLabel text="Technical Competencies" icon={Terminal} delay="0.1s" />
@@ -450,7 +435,6 @@ export default function Portfolio() {
           </div>
         </section>
 
-        {/* CONTACT SECTION */}
         <section id="contact" className="w-full max-w-3xl mx-auto px-6 py-16 scroll-mt-[72px]">
           <div className="bg-zinc-900/40 backdrop-blur-xl border border-zinc-700/50 rounded-3xl p-8 md:p-12 shadow-2xl relative overflow-hidden animate-fade-in-up">
             <div className="absolute top-0 right-0 p-12 opacity-5 pointer-events-none">
@@ -499,7 +483,6 @@ export default function Portfolio() {
 
       </main>
 
-      {/* --- IMMOVABLE ULTRA-MINIMAL FOOTER --- */}
       <footer className="fixed bottom-0 left-0 right-0 z-50 border-t border-zinc-800/80 bg-[#050505]/95 backdrop-blur-xl w-full h-[40px] flex items-center text-[11px] md:text-xs text-zinc-500 px-6">
         <div className="max-w-6xl mx-auto flex justify-between items-center w-full">
           
@@ -514,41 +497,13 @@ export default function Portfolio() {
           </div>
           
           <div className="flex gap-4 items-center">
-            <a href="https://github.com/dilipgowdaan" target="_blank" rel="noreferrer" className="hover:text-white transition-colors"><Github size={14} /></a>
-            <a href="https://linkedin.com/in/dilipkumaran" target="_blank" rel="noreferrer" className="hover:text-white transition-colors"><Linkedin size={14} /></a>
+            <a href="[https://github.com/dilipgowdaan](https://github.com/dilipgowdaan)" target="_blank" rel="noreferrer" className="hover:text-white transition-colors"><Github size={14} /></a>
+            <a href="[https://linkedin.com/in/dilipkumaran](https://linkedin.com/in/dilipkumaran)" target="_blank" rel="noreferrer" className="hover:text-white transition-colors"><Linkedin size={14} /></a>
             <a href="#contact" className="hover:text-indigo-400 transition-colors"><Mail size={14} /></a>
           </div>
 
         </div>
       </footer>
-
-      {/* Global Styles */}
-      <style dangerouslySetInnerHTML={{__html: `
-        html { scroll-behavior: smooth; }
-        
-        /* Premium custom scrollbar styling */
-        ::-webkit-scrollbar { width: 8px; }
-        ::-webkit-scrollbar-track { background: #050505; }
-        ::-webkit-scrollbar-thumb { background: #27272a; border-radius: 10px; border: 2px solid #050505;}
-        ::-webkit-scrollbar-thumb:hover { background: #3f3f46; }
-
-        @keyframes fadeInUp {
-          from { opacity: 0; transform: translateY(20px); filter: blur(4px); }
-          to { opacity: 1; transform: translateY(0); filter: blur(0); }
-        }
-        
-        @keyframes blob {
-          0% { transform: translate(0px, 0px) scale(1); }
-          33% { transform: translate(30px, -50px) scale(1.1); }
-          66% { transform: translate(-20px, 20px) scale(0.9); }
-          100% { transform: translate(0px, 0px) scale(1); }
-        }
-        
-        .animate-fade-in-up { animation: fadeInUp 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards; opacity: 0; }
-        .animate-blob { animation: blob 10s infinite alternate cubic-bezier(0.4, 0, 0.2, 1); }
-        .animation-delay-2000 { animation-delay: 2s; }
-        .animation-delay-4000 { animation-delay: 4s; }
-      `}} />
     </div>
   );
 }
