@@ -6,6 +6,8 @@ import {
   Database, Smartphone, Server, Briefcase, Code
 } from 'lucide-react';
 
+// --- DATA STRUCTURES ---
+
 const softwareProjects = [
   {
     title: "VaidyaMithra - Hospital Management",
@@ -13,9 +15,9 @@ const softwareProjects = [
     tags: ["React", "Firebase", "LLMs", "Vercel"],
     desc: "A complete Hospital Management System featuring an AI-powered health assistant that analyzes symptoms. Implemented secure cloud architecture and real-time status updates.",
     images: [
-      "[https://images.unsplash.com/photo-1576091160550-2173ff9e5ee5?q=80&w=800&auto=format&fit=crop](https://images.unsplash.com/photo-1576091160550-2173ff9e5ee5?q=80&w=800&auto=format&fit=crop)",
-      "[https://images.unsplash.com/photo-1551288049-bebda4e38f71?q=80&w=800&auto=format&fit=crop](https://images.unsplash.com/photo-1551288049-bebda4e38f71?q=80&w=800&auto=format&fit=crop)",
-      "[https://images.unsplash.com/photo-1504868584819-f8e8b4b6d7e3?q=80&w=800&auto=format&fit=crop](https://images.unsplash.com/photo-1504868584819-f8e8b4b6d7e3?q=80&w=800&auto=format&fit=crop)"
+      "https://images.unsplash.com/photo-1576091160550-2173ff9e5ee5?q=80&w=800&auto=format&fit=crop",
+      "https://images.unsplash.com/photo-1551288049-bebda4e38f71?q=80&w=800&auto=format&fit=crop",
+      "https://images.unsplash.com/photo-1504868584819-f8e8b4b6d7e3?q=80&w=800&auto=format&fit=crop"
     ]
   },
   {
@@ -24,9 +26,9 @@ const softwareProjects = [
     tags: ["Full-Stack", "Leaflet.js", "SQL"],
     desc: "Hyper-Local Agri-Marketplace connecting farmers and buyers. Integrated dynamic CRUD, geolocation search, and automated stock updates with multi-language support.",
     images: [
-      "[https://images.unsplash.com/photo-1622383563227-04401ab4e5ea?q=80&w=800&auto=format&fit=crop](https://images.unsplash.com/photo-1622383563227-04401ab4e5ea?q=80&w=800&auto=format&fit=crop)",
-      "[https://images.unsplash.com/photo-1551288049-bebda4e38f71?q=80&w=800&auto=format&fit=crop](https://images.unsplash.com/photo-1551288049-bebda4e38f71?q=80&w=800&auto=format&fit=crop)",
-      "[https://images.unsplash.com/photo-1492011221367-f47e3ccd77a0?q=80&w=800&auto=format&fit=crop](https://images.unsplash.com/photo-1492011221367-f47e3ccd77a0?q=80&w=800&auto=format&fit=crop)"
+      "https://images.unsplash.com/photo-1622383563227-04401ab4e5ea?q=80&w=800&auto=format&fit=crop",
+      "https://images.unsplash.com/photo-1551288049-bebda4e38f71?q=80&w=800&auto=format&fit=crop",
+      "https://images.unsplash.com/photo-1492011221367-f47e3ccd77a0?q=80&w=800&auto=format&fit=crop"
     ]
   },
   {
@@ -35,9 +37,9 @@ const softwareProjects = [
     tags: ["React Native", "Geo-Location", "IoT"],
     desc: "Intelligent Waste Collection Platform with Live Tracking. Geo-enabled urban waste management app featuring role-based control and real-time fleet monitoring.",
     images: [
-      "[https://images.unsplash.com/photo-1519389950473-47ba0277781c?q=80&w=800&auto=format&fit=crop](https://images.unsplash.com/photo-1519389950473-47ba0277781c?q=80&w=800&auto=format&fit=crop)",
-      "[https://images.unsplash.com/photo-1524661135-423995f22d0b?q=80&w=800&auto=format&fit=crop](https://images.unsplash.com/photo-1524661135-423995f22d0b?q=80&w=800&auto=format&fit=crop)",
-      "[https://images.unsplash.com/photo-1605810230434-7631ac76ec81?q=80&w=800&auto=format&fit=crop](https://images.unsplash.com/photo-1605810230434-7631ac76ec81?q=80&w=800&auto=format&fit=crop)"
+      "https://images.unsplash.com/photo-1519389950473-47ba0277781c?q=80&w=800&auto=format&fit=crop",
+      "https://images.unsplash.com/photo-1524661135-423995f22d0b?q=80&w=800&auto=format&fit=crop",
+      "https://images.unsplash.com/photo-1605810230434-7631ac76ec81?q=80&w=800&auto=format&fit=crop"
     ]
   }
 ];
@@ -49,9 +51,9 @@ const hardwareProjects = [
     tags: ["Hardware", "Supabase", "React"],
     desc: "Grid integrated PV System with Weather Forecast Analysis. Hardware-integrated production grade system managed via a full-stack Vercel hosted dashboard and mobile app.",
     images: [
-      "[https://images.unsplash.com/photo-1509391366360-1e97d5259d81?q=80&w=800&auto=format&fit=crop](https://images.unsplash.com/photo-1509391366360-1e97d5259d81?q=80&w=800&auto=format&fit=crop)",
-      "[https://images.unsplash.com/photo-1551288049-bebda4e38f71?q=80&w=800&auto=format&fit=crop](https://images.unsplash.com/photo-1551288049-bebda4e38f71?q=80&w=800&auto=format&fit=crop)",
-      "[https://images.unsplash.com/photo-1518770660439-4636190af475?q=80&w=800&auto=format&fit=crop](https://images.unsplash.com/photo-1518770660439-4636190af475?q=80&w=800&auto=format&fit=crop)"
+      "https://images.unsplash.com/photo-1509391366360-1e97d5259d81?q=80&w=800&auto=format&fit=crop",
+      "https://images.unsplash.com/photo-1551288049-bebda4e38f71?q=80&w=800&auto=format&fit=crop",
+      "https://images.unsplash.com/photo-1518770660439-4636190af475?q=80&w=800&auto=format&fit=crop"
     ]
   },
   {
@@ -60,9 +62,9 @@ const hardwareProjects = [
     tags: ["VLSI", "System Verilog", "Vedic Math"],
     desc: "Formal and Functional Verification of a high-performance 32-bit ALU using a Vedic multiplier (Urdhva-Tiryagbhyam), ensuring absolute accuracy and reliability.",
     images: [
-      "[https://images.unsplash.com/photo-1518932945647-7a3c96922221?q=80&w=800&auto=format&fit=crop](https://images.unsplash.com/photo-1518932945647-7a3c96922221?q=80&w=800&auto=format&fit=crop)",
-      "[https://images.unsplash.com/photo-1591799264318-7e6ef8ddb7ea?q=80&w=800&auto=format&fit=crop](https://images.unsplash.com/photo-1591799264318-7e6ef8ddb7ea?q=80&w=800&auto=format&fit=crop)",
-      "[https://images.unsplash.com/photo-1555680202-c86f0e12f086?q=80&w=800&auto=format&fit=crop](https://images.unsplash.com/photo-1555680202-c86f0e12f086?q=80&w=800&auto=format&fit=crop)"
+      "https://images.unsplash.com/photo-1518932945647-7a3c96922221?q=80&w=800&auto=format&fit=crop",
+      "https://images.unsplash.com/photo-1591799264318-7e6ef8ddb7ea?q=80&w=800&auto=format&fit=crop",
+      "https://images.unsplash.com/photo-1555680202-c86f0e12f086?q=80&w=800&auto=format&fit=crop"
     ]
   },
   {
@@ -71,9 +73,9 @@ const hardwareProjects = [
     tags: ["Embedded Control", "Robotics"],
     desc: "Designed and implemented a robotic arm system with precise control mechanisms suitable for planetary exploration and object handling.",
     images: [
-      "[https://images.unsplash.com/photo-1485827404703-89b55fcc595e?q=80&w=800&auto=format&fit=crop](https://images.unsplash.com/photo-1485827404703-89b55fcc595e?q=80&w=800&auto=format&fit=crop)",
-      "[https://images.unsplash.com/photo-1531746790731-6c087fecd65a?q=80&w=800&auto=format&fit=crop](https://images.unsplash.com/photo-1531746790731-6c087fecd65a?q=80&w=800&auto=format&fit=crop)",
-      "[https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?q=80&w=800&auto=format&fit=crop](https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?q=80&w=800&auto=format&fit=crop)"
+      "https://images.unsplash.com/photo-1485827404703-89b55fcc595e?q=80&w=800&auto=format&fit=crop",
+      "https://images.unsplash.com/photo-1531746790731-6c087fecd65a?q=80&w=800&auto=format&fit=crop",
+      "https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?q=80&w=800&auto=format&fit=crop"
     ]
   }
 ];
@@ -206,12 +208,25 @@ export default function App() {
     setSubmitStatus('submitting');
     
     // FETCHING SECURE ENVIRONMENT VARIABLES FROM VERCEL
-    const serviceId = import.meta.env.VITE_EMAILJS_SERVICE_ID; 
-    const templateId = import.meta.env.VITE_EMAILJS_TEMPLATE_ID;
-    const publicKey = import.meta.env.VITE_EMAILJS_PUBLIC_KEY;
+    // NOTE: Uncomment the three lines below when deploying to Vercel.
+    // const serviceId = import.meta.env.VITE_EMAILJS_SERVICE_ID; 
+    // const templateId = import.meta.env.VITE_EMAILJS_TEMPLATE_ID;
+    // const publicKey = import.meta.env.VITE_EMAILJS_PUBLIC_KEY;
+    
+    const serviceId = 'service_bvptl1g'; 
+    const templateId = 'template_q9d2t3t';
+    const publicKey = 'jMeHyyiKaYCLnBG4o';
+
+    // Safety check - helps debug if .env file isn't loaded properly
+    if (!serviceId || !templateId || !publicKey) {
+      console.error("EmailJS Environment variables are missing! Make sure your .env file is loaded and the dev server was restarted.");
+      setSubmitStatus('error');
+      setTimeout(() => setSubmitStatus('idle'), 3000);
+      return;
+    }
 
     try {
-      const response = await fetch('[https://api.emailjs.com/api/v1.0/email/send](https://api.emailjs.com/api/v1.0/email/send)', {
+      const response = await fetch('https://api.emailjs.com/api/v1.0/email/send', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
@@ -231,7 +246,7 @@ export default function App() {
         setSubmitStatus('success');
         setFormData({ name: '', email: '', message: '' });
         setTimeout(() => setSubmitStatus('idle'), 3000);
-      } else throw new Error();
+      } else throw new Error('Failed to send');
     } catch (error) {
       setSubmitStatus('error');
       setTimeout(() => setSubmitStatus('idle'), 3000);
@@ -252,7 +267,7 @@ export default function App() {
         <div className="absolute top-[-10%] left-[-10%] w-[500px] h-[500px] bg-indigo-600/20 rounded-full mix-blend-screen filter blur-[100px] opacity-50 animate-blob" style={{ transform: `translate(${mousePosition.x}px, ${mousePosition.y}px)` }} />
         <div className="absolute top-[20%] right-[-10%] w-[400px] h-[400px] bg-emerald-600/10 rounded-full mix-blend-screen filter blur-[100px] opacity-50 animate-blob animation-delay-2000" style={{ transform: `translate(${-mousePosition.x}px, ${-mousePosition.y}px)` }} />
         <div className="absolute bottom-[-20%] left-[20%] w-[600px] h-[600px] bg-purple-600/10 rounded-full mix-blend-screen filter blur-[120px] opacity-40 animate-blob animation-delay-4000" />
-        <div className="absolute inset-0 bg-[url('[https://grainy-gradients.vercel.app/noise.svg](https://grainy-gradients.vercel.app/noise.svg)')] opacity-20 mix-blend-overlay"></div>
+        <div className="absolute inset-0 bg-[url('https://grainy-gradients.vercel.app/noise.svg')] opacity-20 mix-blend-overlay"></div>
       </div>
 
       <header className="fixed top-0 left-0 right-0 z-50 bg-[#050505]/90 backdrop-blur-xl border-b border-zinc-800/80 shadow-lg py-4 px-6 h-[72px]">
@@ -324,7 +339,7 @@ export default function App() {
               <a href="#contact" className="h-12 px-8 rounded-xl bg-zinc-100 text-zinc-950 font-bold flex items-center gap-2 hover:bg-white hover:scale-105 active:scale-95 transition-all shadow-[0_0_20px_rgba(255,255,255,0.2)]">
                 <Mail size={18} /> Get in Touch
               </a>
-              <a href="[https://github.com/dilipgowdaan](https://github.com/dilipgowdaan)" target="_blank" rel="noreferrer" className="h-12 px-8 rounded-xl bg-zinc-900/50 backdrop-blur-md border border-zinc-700 text-zinc-100 font-medium flex items-center gap-2 hover:bg-zinc-800 transition-all">
+              <a href="https://github.com/dilipgowdaan" target="_blank" rel="noreferrer" className="h-12 px-8 rounded-xl bg-zinc-900/50 backdrop-blur-md border border-zinc-700 text-zinc-100 font-medium flex items-center gap-2 hover:bg-zinc-800 transition-all">
                 <Github size={18} /> GitHub Profile
               </a>
             </div>
@@ -497,8 +512,8 @@ export default function App() {
           </div>
           
           <div className="flex gap-4 items-center">
-            <a href="[https://github.com/dilipgowdaan](https://github.com/dilipgowdaan)" target="_blank" rel="noreferrer" className="hover:text-white transition-colors"><Github size={14} /></a>
-            <a href="[https://linkedin.com/in/dilipkumaran](https://linkedin.com/in/dilipkumaran)" target="_blank" rel="noreferrer" className="hover:text-white transition-colors"><Linkedin size={14} /></a>
+            <a href="https://github.com/dilipgowdaan" target="_blank" rel="noreferrer" className="hover:text-white transition-colors"><Github size={14} /></a>
+            <a href="https://linkedin.com/in/dilipkumaran" target="_blank" rel="noreferrer" className="hover:text-white transition-colors"><Linkedin size={14} /></a>
             <a href="#contact" className="hover:text-indigo-400 transition-colors"><Mail size={14} /></a>
           </div>
 
