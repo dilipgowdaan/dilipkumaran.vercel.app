@@ -207,20 +207,11 @@ export default function App() {
     e.preventDefault();
     setSubmitStatus('submitting');
     
-    // FETCHING SECURE ENVIRONMENT VARIABLES FROM VERCEL
-    // NOTE: Uncomment the three lines below when deploying to Vercel.
-    const serviceId = import.meta.env.VITE_EMAILJS_SERVICE_ID; 
-    const templateId = import.meta.env.VITE_EMAILJS_TEMPLATE_ID;
-    const publicKey = import.meta.env.VITE_EMAILJS_PUBLIC_KEY;
-    
-
-    // Safety check - helps debug if .env file isn't loaded properly
-    if (!serviceId || !templateId || !publicKey) {
-      console.error("EmailJS Environment variables are missing! Make sure your .env file is loaded and the dev server was restarted.");
-      setSubmitStatus('error');
-      setTimeout(() => setSubmitStatus('idle'), 3000);
-      return;
-    }
+    // Using hardcoded keys avoids build environment compatibility issues 
+    // and correctly sends the form without Bad Request errors.
+    const serviceId = 'service_bvptl1g'; 
+    const templateId = 'template_q9d2t3t';
+    const publicKey = 'jMeHyyiKaYCLnBG4o';
 
     try {
       const response = await fetch('https://api.emailjs.com/api/v1.0/email/send', {
