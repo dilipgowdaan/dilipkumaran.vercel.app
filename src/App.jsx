@@ -85,6 +85,8 @@ const hardwareProjects = [
   }
 ];
 
+// --- ADVANCED UI COMPONENTS ---
+
 const SectionLabel = ({ text, delay = "0s", icon: Icon }) => (
   <div className="flex items-center gap-4 mb-8 animate-fade-in-up" style={{ animationDelay: delay, animationFillMode: 'both' }}>
     <h2 className="text-sm font-mono text-zinc-400 uppercase tracking-[0.2em] bg-clip-text text-transparent bg-gradient-to-r from-zinc-300 to-zinc-600 flex items-center gap-2">
@@ -93,6 +95,31 @@ const SectionLabel = ({ text, delay = "0s", icon: Icon }) => (
     <div className="h-[1px] bg-gradient-to-r from-zinc-800 to-transparent flex-grow"></div>
   </div>
 );
+
+const MagneticButton = ({ children, className, href, download, target, rel, onClick, type, disabled }) => {
+  const [position, setPosition] = useState({ x: 0, y: 0 });
+
+  const handleMouseMove = (e) => {
+    const { left, top, width, height } = e.currentTarget.getBoundingClientRect();
+    const x = (e.clientX - left - width / 2) * 0.2; // 0.2 represents the magnetic pull strength
+    const y = (e.clientY - top - height / 2) * 0.2;
+    setPosition({ x, y });
+  };
+
+  const handleMouseLeave = () => {
+    setPosition({ x: 0, y: 0 });
+  };
+
+  const commonProps = {
+    onMouseMove: handleMouseMove,
+    onMouseLeave: handleMouseLeave,
+    style: { transform: `translate(${position.x}px, ${position.y}px)` },
+    className: `transition-transform duration-200 ease-out ${className}`
+  };
+
+  if (href) return <a href={href} download={download} target={target} rel={rel} {...commonProps}>{children}</a>;
+  return <button type={type} disabled={disabled} onClick={onClick} {...commonProps}>{children}</button>;
+};
 
 const ProjectCard = ({ project, isHovered, onMouseEnter, onMouseLeave }) => {
   const [imgIdx, setImgIdx] = useState(0);
@@ -186,20 +213,58 @@ const ProjectRow = ({ projects }) => {
 };
 
 export default function App() {
-  const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
   const [activeSection, setActiveSection] = useState('home');
-
   const [formData, setFormData] = useState({ name: '', email: '', message: '' });
   const [submitStatus, setSubmitStatus] = useState('idle'); 
+  const [toast, setToast] = useState({ visible: false, message: '', type: '' });
 
+  // Custom UI States
+  const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 }); // Background blob
+  const [cursorPos, setCursorPos] = useState({ x: -100, y: -100 }); // Custom Cursor dot
+  const [trailPos, setTrailPos] = useState({ x: -100, y: -100 }); // Custom Cursor ring
+  const [scrollProgress, setScrollProgress] = useState("0%"); // Scroll Progress Bar
+  const [typewriterText, setTypewriterText] = useState(""); // Typewriter Effect
+
+  const fullSubtitle = "Electronics and Embedded Systems Engineer";
+
+  // Initialize Typewriter Effect
+  useEffect(() => {
+    let i = 0;
+    const typingInterval = setInterval(() => {
+      if (i < fullSubtitle.length) {
+        setTypewriterText(fullSubtitle.slice(0, i + 1));
+        i++;
+      } else {
+        clearInterval(typingInterval);
+      }
+    }, 50); // Speed of typing
+    return () => clearInterval(typingInterval);
+  }, []);
+
+  // Global Event Listeners (Mouse, Scroll, Intersection)
   useEffect(() => {
     const handleMouseMove = (e) => {
+      // Background parallax blob
       setMousePosition({
         x: (e.clientX / window.innerWidth - 0.5) * 20,
         y: (e.clientY / window.innerHeight - 0.5) * 20
       });
+      // Custom Cursor exact position
+      setCursorPos({ x: e.clientX, y: e.clientY });
+      // Custom Cursor trailing ring (slight delay for smoothness)
+      setTimeout(() => {
+        setTrailPos({ x: e.clientX, y: e.clientY });
+      }, 40);
     };
+
+    const handleScroll = () => {
+      const totalScroll = document.documentElement.scrollTop;
+      const windowHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+      setScrollProgress(`${(totalScroll / windowHeight) * 100}%`);
+    };
+
     window.addEventListener('mousemove', handleMouseMove);
+    window.addEventListener('scroll', handleScroll);
 
     const observer = new IntersectionObserver((entries) => {
       entries.forEach(entry => {
@@ -213,9 +278,15 @@ export default function App() {
 
     return () => {
       window.removeEventListener('mousemove', handleMouseMove);
+      window.removeEventListener('scroll', handleScroll);
       observer.disconnect();
     };
   }, []);
+
+  const showToast = (message, type) => {
+    setToast({ visible: true, message, type });
+    setTimeout(() => setToast({ visible: false, message: '', type: '' }), 4000);
+  };
 
   const handleContactSubmit = async (e) => {
     e.preventDefault();
@@ -228,8 +299,8 @@ export default function App() {
 
     if (!serviceId || !templateId || !publicKey) {
       console.error("EmailJS Environment variables are missing!");
-      setSubmitStatus('error');
-      setTimeout(() => setSubmitStatus('idle'), 3000);
+      setSubmitStatus('idle');
+      showToast("System Configuration Error.", "error");
       return;
     }
 
@@ -251,13 +322,13 @@ export default function App() {
       });
 
       if (response.ok) {
-        setSubmitStatus('success');
+        setSubmitStatus('idle');
         setFormData({ name: '', email: '', message: '' });
-        setTimeout(() => setSubmitStatus('idle'), 3000);
+        showToast("Transmission Successful! I'll get back to you soon.", "success");
       } else throw new Error('Failed to send');
     } catch (error) {
-      setSubmitStatus('error');
-      setTimeout(() => setSubmitStatus('idle'), 3000);
+      setSubmitStatus('idle');
+      showToast("Error Sending Message. Please try again later.", "error");
     }
   };
 
@@ -278,8 +349,26 @@ export default function App() {
   ];
 
   return (
-    <div className="min-h-screen bg-[#050505] text-zinc-300 font-sans selection:bg-indigo-500/30 selection:text-indigo-200 relative pb-[72px] custom-scrollbar">
+    <div className="min-h-screen bg-[#050505] text-zinc-300 font-sans selection:bg-indigo-500/30 selection:text-indigo-200 relative pb-[72px] custom-scrollbar overflow-x-hidden">
       
+      {/* Custom Cursor System */}
+      <div 
+        className="hidden md:block fixed top-0 left-0 w-2.5 h-2.5 bg-indigo-400 rounded-full pointer-events-none z-[9999] mix-blend-screen shadow-[0_0_10px_#818cf8]" 
+        style={{ transform: `translate(${cursorPos.x - 5}px, ${cursorPos.y - 5}px)` }} 
+      />
+      <div 
+        className="hidden md:block fixed top-0 left-0 w-8 h-8 border-2 border-indigo-500/40 rounded-full pointer-events-none z-[9998] transition-all duration-100 ease-out" 
+        style={{ transform: `translate(${trailPos.x - 16}px, ${trailPos.y - 16}px)` }} 
+      />
+
+      {/* Floating Toast Notification */}
+      <div className={`fixed bottom-24 right-6 z-50 transition-all duration-500 transform ${toast.visible ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0 pointer-events-none'}`}>
+        <div className={`px-6 py-4 rounded-xl backdrop-blur-xl border shadow-2xl flex items-center gap-3 ${toast.type === 'success' ? 'bg-emerald-500/10 border-emerald-500/30 text-emerald-400' : 'bg-red-500/10 border-red-500/30 text-red-400'}`}>
+          {toast.type === 'success' ? <CheckCircle size={20} /> : <XCircle size={20} />}
+          <span className="font-semibold text-sm tracking-wide">{toast.message}</span>
+        </div>
+      </div>
+
       {/* Background Orbs & Effects */}
       <div className="fixed inset-0 z-0 pointer-events-none">
         <div className="absolute top-[-10%] left-[-10%] w-[500px] h-[500px] bg-indigo-600/20 rounded-full mix-blend-screen filter blur-[100px] opacity-50 animate-blob" style={{ transform: `translate(${mousePosition.x}px, ${mousePosition.y}px)` }} />
@@ -289,8 +378,8 @@ export default function App() {
       </div>
 
       {/* --- HEADER --- */}
-      <header className="fixed top-0 left-0 right-0 z-50 bg-[#050505]/90 backdrop-blur-xl border-b border-zinc-800/80 shadow-lg py-4 px-6 h-[72px]">
-        <div className="max-w-6xl mx-auto flex items-center justify-between h-full">
+      <header className="fixed top-0 left-0 right-0 z-50 bg-[#050505]/90 backdrop-blur-xl border-b border-zinc-800/80 shadow-lg h-[72px]">
+        <div className="max-w-6xl mx-auto flex items-center justify-between h-full px-6">
           <a href="#home" onClick={(e) => scrollToSection(e, 'home')} className="flex items-center gap-3 cursor-pointer group focus:outline-none">
             <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-indigo-500 to-purple-600 flex items-center justify-center text-white font-bold shadow-[0_0_15px_rgba(99,102,241,0.4)] group-hover:scale-110 transition-all duration-300">
               D
@@ -326,6 +415,8 @@ export default function App() {
             </a>
           </nav>
         </div>
+        {/* Scroll Progress Bar */}
+        <div className="absolute bottom-0 left-0 h-[2px] bg-indigo-500 z-50 transition-all duration-150 ease-out shadow-[0_0_10px_#6366f1]" style={{ width: scrollProgress }} />
       </header>
 
       {/* --- MAIN CONTENT --- */}
@@ -344,12 +435,14 @@ export default function App() {
                 <span className="text-emerald-400 text-sm font-medium tracking-wide">Available for Software & Embedded Roles</span>
               </div>
               
-              <div className="space-y-3">
+              <div className="space-y-3 min-h-[140px]">
                 <h1 className="text-5xl md:text-7xl font-extrabold text-white tracking-tighter leading-tight drop-shadow-lg">
                   DILIP KUMAR A N
                 </h1>
+                {/* Typewriter Effect H2 */}
                 <h2 className="text-xl md:text-2xl font-medium text-transparent bg-clip-text bg-gradient-to-r from-indigo-400 to-purple-400 tracking-tight">
-                  Electronics and Embedded Systems Engineer
+                  {typewriterText}
+                  <span className="animate-pulse text-indigo-400 opacity-80">|</span>
                 </h2>
               </div>
 
@@ -357,17 +450,28 @@ export default function App() {
                 Engineering graduate with industry experience, seeking a challenging role to apply technical and problem-solving skills while growing in the field of electronics, embedded systems, and software development.
               </p>
 
-              {/* Call To Action Buttons (CV, Contact, GitHub) */}
+              {/* Call To Action Buttons with Magnetic Pull */}
               <div className="flex flex-wrap items-center gap-4 pt-6">
-                <a href="/Dilip_Kumar_CV.pdf" download="Dilip_Kumar_CV.pdf" className="h-12 px-7 rounded-xl bg-indigo-500 text-white font-bold flex items-center gap-2 hover:bg-indigo-400 hover:-translate-y-1.5 hover:shadow-[0_10px_25px_rgba(99,102,241,0.4)] active:scale-95 transition-all duration-300 shadow-[0_0_15px_rgba(99,102,241,0.2)]">
+                <MagneticButton 
+                  href="/Dilip_Kumar_CV.pdf" download="Dilip_Kumar_CV.pdf" 
+                  className="h-12 px-7 rounded-xl bg-indigo-500 text-white font-bold flex items-center gap-2 hover:bg-indigo-400 hover:shadow-[0_10px_25px_rgba(99,102,241,0.4)] transition-colors duration-300 shadow-[0_0_15px_rgba(99,102,241,0.2)]"
+                >
                   <Download size={18} className="animate-bounce mt-1" /> Download CV
-                </a>
-                <a href="#contact" onClick={(e) => scrollToSection(e, 'contact')} className="h-12 px-7 rounded-xl bg-zinc-100 text-zinc-950 font-bold flex items-center gap-2 hover:bg-white hover:-translate-y-1.5 hover:shadow-[0_10px_25px_rgba(255,255,255,0.3)] active:scale-95 transition-all duration-300 shadow-[0_0_15px_rgba(255,255,255,0.1)]">
+                </MagneticButton>
+                
+                <MagneticButton 
+                  href="#contact" onClick={(e) => scrollToSection(e, 'contact')} 
+                  className="h-12 px-7 rounded-xl bg-zinc-100 text-zinc-950 font-bold flex items-center gap-2 hover:bg-white hover:shadow-[0_10px_25px_rgba(255,255,255,0.3)] transition-colors duration-300 shadow-[0_0_15px_rgba(255,255,255,0.1)]"
+                >
                   <Mail size={18} /> Get in Touch
-                </a>
-                <a href="https://github.com/dilipgowdaan" target="_blank" rel="noreferrer" className="h-12 px-7 rounded-xl bg-zinc-900/50 backdrop-blur-md border border-zinc-700 text-zinc-100 font-medium flex items-center gap-2 hover:bg-zinc-800 hover:-translate-y-1.5 hover:shadow-[0_10px_20px_rgba(0,0,0,0.4)] active:scale-95 transition-all duration-300 shadow-[0_4px_10px_rgba(0,0,0,0.2)]">
+                </MagneticButton>
+
+                <MagneticButton 
+                  href="https://github.com/dilipgowdaan" target="_blank" rel="noreferrer" 
+                  className="h-12 px-7 rounded-xl bg-zinc-900/50 backdrop-blur-md border border-zinc-700 text-zinc-100 font-medium flex items-center gap-2 hover:bg-zinc-800 hover:shadow-[0_10px_20px_rgba(0,0,0,0.4)] transition-colors duration-300 shadow-[0_4px_10px_rgba(0,0,0,0.2)]"
+                >
                   <Github size={18} /> GitHub Profile
-                </a>
+                </MagneticButton>
               </div>
             </div>
 
@@ -434,6 +538,19 @@ export default function App() {
             <div className="animate-fade-in-up" style={{ animationDelay: '0.4s' }}>
               <ProjectRow projects={hardwareProjects} />
             </div>
+          </div>
+
+          {/* GitHub Contributions Graph Setup */}
+          <div className="animate-fade-in-up" style={{ animationDelay: '0.5s' }}>
+             <SectionLabel text="Open Source Contributions" icon={Github} delay="0.5s" />
+             <div className="bg-zinc-900/40 backdrop-blur-xl border border-zinc-700/50 rounded-3xl p-8 shadow-2xl relative overflow-hidden group hover:border-zinc-500/50 hover:shadow-[0_10px_40px_-10px_rgba(99,102,241,0.15)] hover:-translate-y-1 transition-all duration-500 flex justify-center items-center">
+                {/* Real-time GitHub chart API customized with Indigo color hex (6366f1) */}
+                <img 
+                  src="https://ghchart.rshah.org/6366f1/dilipgowdaan" 
+                  alt="Dilip's GitHub Contributions" 
+                  className="w-full max-w-4xl opacity-80 group-hover:opacity-100 transition-opacity duration-500 drop-shadow-lg" 
+                />
+             </div>
           </div>
         </section>
 
@@ -612,15 +729,12 @@ export default function App() {
                   className="w-full bg-zinc-950/50 border border-zinc-800 rounded-xl px-5 py-3 text-zinc-100 focus:outline-none focus:border-indigo-500 focus:bg-zinc-900 transition-all resize-none hover:border-zinc-600"
                 ></textarea>
               </div>
-              <button 
+              <MagneticButton 
                 type="submit" disabled={submitStatus === 'submitting'}
-                className="w-full md:w-auto px-10 py-3 bg-indigo-500 hover:bg-indigo-600 text-white font-bold rounded-xl transition-all shadow-[0_0_20px_rgba(99,102,241,0.3)] hover:-translate-y-1 hover:shadow-[0_10px_25px_rgba(99,102,241,0.4)] active:scale-95 disabled:opacity-50 disabled:hover:translate-y-0 flex items-center justify-center gap-2 mt-4"
+                className="w-full md:w-auto px-10 py-3 bg-indigo-500 hover:bg-indigo-600 text-white font-bold rounded-xl transition-all shadow-[0_0_20px_rgba(99,102,241,0.3)] hover:shadow-[0_10px_25px_rgba(99,102,241,0.4)] active:scale-95 disabled:opacity-50 flex items-center justify-center gap-2 mt-4"
               >
-                {submitStatus === 'idle' && <><Send size={18} /> Send Message</>}
-                {submitStatus === 'submitting' && 'Transmitting...'}
-                {submitStatus === 'success' && <><CheckCircle size={18} /> Transmission Successful</>}
-                {submitStatus === 'error' && <><XCircle size={18} /> Error Sending</>}
-              </button>
+                {submitStatus === 'idle' ? <><Send size={18} /> Send Message</> : 'Transmitting...'}
+              </MagneticButton>
             </form>
           </div>
         </section>
@@ -649,6 +763,9 @@ export default function App() {
 
         </div>
       </footer>
+
+      {/* Global CSS to hide OS Cursor globally */}
+      <style dangerouslySetInnerHTML={{__html: ` * { cursor: none !important; } `}} />
     </div>
   );
 }
