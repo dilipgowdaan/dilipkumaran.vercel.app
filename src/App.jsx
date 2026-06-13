@@ -88,7 +88,7 @@ const hardwareProjects = [
 const SectionLabel = ({ text, delay = "0s", icon: Icon }) => (
   <div className="flex items-center gap-4 mb-8 animate-fade-in-up" style={{ animationDelay: delay, animationFillMode: 'both' }}>
     <h2 className="text-sm font-mono text-zinc-400 uppercase tracking-[0.2em] bg-clip-text text-transparent bg-gradient-to-r from-zinc-300 to-zinc-600 flex items-center gap-2">
-      {Icon && <Icon size={16} className="text-red-500" />} {text}
+      {Icon && <Icon size={16} className="text-indigo-400" />} {text}
     </h2>
     <div className="h-[1px] bg-gradient-to-r from-zinc-800 to-transparent flex-grow"></div>
   </div>
@@ -122,7 +122,7 @@ const ProjectCard = ({ project, isHovered, onMouseEnter, onMouseLeave }) => {
       onMouseLeave={onMouseLeave}
       className={`relative overflow-hidden transition-all duration-700 ease-[cubic-bezier(0.25,1,0.5,1)] flex flex-col bg-zinc-900/50 backdrop-blur-xl border border-zinc-700/50 rounded-2xl group shadow-lg min-h-[350px] md:min-h-[400px] hover:-translate-y-2 hover:shadow-[0_15px_40px_-10px_rgba(0,0,0,0.5)]
         ${project.url ? 'cursor-pointer' : 'cursor-default'}
-        ${isHovered ? 'md:flex-[2.5] border-red-500/50 shadow-[0_8px_40px_-12px_rgba(220,38,38,0.2)]' : 'md:flex-1 hover:border-zinc-500/50'}`
+        ${isHovered ? 'md:flex-[2.5] border-indigo-500/50 shadow-[0_8px_40px_-12px_rgba(99,102,241,0.2)]' : 'md:flex-1 hover:border-zinc-500/50'}`
       }
     >
       <div className="absolute inset-0 z-0">
@@ -134,19 +134,19 @@ const ProjectCard = ({ project, isHovered, onMouseEnter, onMouseLeave }) => {
             className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-1000 ease-in-out ${i === imgIdx ? (isHovered ? 'opacity-40 scale-105' : 'opacity-40 md:opacity-20 scale-105 md:scale-100') : 'opacity-0 scale-100'}`}
           />
         ))}
-        <div className="absolute inset-0 bg-gradient-to-t from-[#0a0505] via-[#0a0505]/70 to-transparent" />
-        <div className={`absolute inset-0 transition-opacity duration-700 ${isHovered ? 'opacity-0' : 'opacity-0 md:opacity-40 bg-[#0a0505]/30'}`} />
+        <div className="absolute inset-0 bg-gradient-to-t from-[#050505] via-[#050505]/70 to-transparent" />
+        <div className={`absolute inset-0 transition-opacity duration-700 ${isHovered ? 'opacity-0' : 'opacity-0 md:opacity-40 bg-[#050505]/30'}`} />
       </div>
 
       <div className="relative z-10 flex flex-col justify-end h-full p-6 md:p-8">
         <div className={`transition-all duration-700 transform ${isHovered ? 'translate-y-0 opacity-100' : 'translate-y-0 md:translate-y-4 opacity-100'}`}>
           <div className="flex items-center gap-3 mb-4">
-            <div className={`p-2.5 rounded-xl border transition-colors duration-500 ${isHovered ? 'bg-red-500/20 border-red-500/40 text-red-400 scale-110 shadow-[0_0_15px_rgba(220,38,38,0.3)]' : 'bg-red-500/20 md:bg-zinc-800/80 border-red-500/40 md:border-zinc-700 text-red-400 md:text-zinc-400 scale-110 md:scale-100'}`}>
+            <div className={`p-2.5 rounded-xl border transition-colors duration-500 ${isHovered ? 'bg-indigo-500/20 border-indigo-500/40 text-indigo-400 scale-110 shadow-[0_0_15px_rgba(99,102,241,0.3)]' : 'bg-indigo-500/20 md:bg-zinc-800/80 border-indigo-500/40 md:border-zinc-700 text-indigo-400 md:text-zinc-400 scale-110 md:scale-100'}`}>
               <project.icon size={20} />
             </div>
             <div className="flex flex-wrap gap-2">
               {project.tags.map(t => (
-                <span key={t} className={`text-[10px] font-mono font-semibold px-2 py-1 rounded-md border transition-all duration-500 ${isHovered ? 'bg-red-900/30 text-red-200 border-red-500/30 translate-y-0' : 'bg-red-900/30 md:bg-zinc-800/80 text-red-200 md:text-zinc-400 border-red-500/30 md:border-zinc-700 translate-y-0'}`}>
+                <span key={t} className={`text-[10px] font-mono font-semibold px-2 py-1 rounded-md border transition-all duration-500 ${isHovered ? 'bg-indigo-900/30 text-indigo-200 border-indigo-500/30 translate-y-0' : 'bg-indigo-900/30 md:bg-zinc-800/80 text-indigo-200 md:text-zinc-400 border-indigo-500/30 md:border-zinc-700 translate-y-0'}`}>
                   {t}
                 </span>
               ))}
@@ -155,7 +155,7 @@ const ProjectCard = ({ project, isHovered, onMouseEnter, onMouseLeave }) => {
           
           <h3 className={`font-bold transition-all duration-500 mb-3 flex items-center gap-2 ${isHovered ? 'text-2xl text-white' : 'text-2xl md:text-xl text-white md:text-zinc-200 md:truncate whitespace-normal'}`}>
             {project.title}
-            {project.url && <ExternalLink size={18} className={`text-amber-400 transition-opacity duration-500 ${isHovered ? 'opacity-100' : 'opacity-100 md:opacity-0'}`} />}
+            {project.url && <ExternalLink size={18} className={`text-indigo-400 transition-opacity duration-500 ${isHovered ? 'opacity-100' : 'opacity-100 md:opacity-0'}`} />}
           </h3>
           
           <div className={`grid transition-all duration-700 ease-in-out ${isHovered ? 'grid-rows-[1fr] opacity-100 mt-2' : 'grid-rows-[1fr] md:grid-rows-[0fr] opacity-100 md:opacity-0 mt-2 md:mt-0'}`}>
@@ -221,6 +221,7 @@ export default function App() {
     e.preventDefault();
     setSubmitStatus('submitting');
     
+    // Using hardcoded keys to prevent build compilation warnings in this environment
     const serviceId = 'service_bvptl1g'; 
     const templateId = 'template_q9d2t3t';
     const publicKey = 'jMeHyyiKaYCLnBG4o';
@@ -260,6 +261,15 @@ export default function App() {
     }
   };
 
+  // Custom scrolling function to prevent URL changes (hash fragments)
+  const scrollToSection = (e, sectionId) => {
+    e.preventDefault();
+    const element = document.getElementById(sectionId);
+    if (element) {
+      element.scrollIntoView({ behavior: 'smooth' });
+    }
+  };
+
   const navItems = [
     { id: 'home', label: 'About' },
     { id: 'experience', label: 'Experience' },
@@ -268,21 +278,21 @@ export default function App() {
   ];
 
   return (
-    <div className="min-h-screen bg-[#0a0505] text-zinc-300 font-sans selection:bg-red-500/30 selection:text-red-200 relative pb-[72px] custom-scrollbar">
+    <div className="min-h-screen bg-[#050505] text-zinc-300 font-sans selection:bg-indigo-500/30 selection:text-indigo-200 relative pb-[72px] custom-scrollbar">
       
       {/* Background Orbs & Effects */}
       <div className="fixed inset-0 z-0 pointer-events-none">
-        <div className="absolute top-[-10%] left-[-10%] w-[500px] h-[500px] bg-red-600/20 rounded-full mix-blend-screen filter blur-[100px] opacity-50 animate-blob" style={{ transform: `translate(${mousePosition.x}px, ${mousePosition.y}px)` }} />
-        <div className="absolute top-[20%] right-[-10%] w-[400px] h-[400px] bg-amber-600/10 rounded-full mix-blend-screen filter blur-[100px] opacity-50 animate-blob animation-delay-2000" style={{ transform: `translate(${-mousePosition.x}px, ${-mousePosition.y}px)` }} />
-        <div className="absolute bottom-[-20%] left-[20%] w-[600px] h-[600px] bg-orange-600/10 rounded-full mix-blend-screen filter blur-[120px] opacity-40 animate-blob animation-delay-4000" />
+        <div className="absolute top-[-10%] left-[-10%] w-[500px] h-[500px] bg-indigo-600/20 rounded-full mix-blend-screen filter blur-[100px] opacity-50 animate-blob" style={{ transform: `translate(${mousePosition.x}px, ${mousePosition.y}px)` }} />
+        <div className="absolute top-[20%] right-[-10%] w-[400px] h-[400px] bg-emerald-600/10 rounded-full mix-blend-screen filter blur-[100px] opacity-50 animate-blob animation-delay-2000" style={{ transform: `translate(${-mousePosition.x}px, ${-mousePosition.y}px)` }} />
+        <div className="absolute bottom-[-20%] left-[20%] w-[600px] h-[600px] bg-purple-600/10 rounded-full mix-blend-screen filter blur-[120px] opacity-40 animate-blob animation-delay-4000" />
         <div className="absolute inset-0 bg-[url('https://grainy-gradients.vercel.app/noise.svg')] opacity-20 mix-blend-overlay"></div>
       </div>
 
       {/* --- HEADER --- */}
-      <header className="fixed top-0 left-0 right-0 z-50 bg-[#0a0505]/90 backdrop-blur-xl border-b border-zinc-800/80 shadow-lg py-4 px-6 h-[72px]">
+      <header className="fixed top-0 left-0 right-0 z-50 bg-[#050505]/90 backdrop-blur-xl border-b border-zinc-800/80 shadow-lg py-4 px-6 h-[72px]">
         <div className="max-w-6xl mx-auto flex items-center justify-between h-full">
-          <a href="#home" className="flex items-center gap-3 cursor-pointer group focus:outline-none">
-            <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-red-600 to-amber-500 flex items-center justify-center text-white font-bold shadow-[0_0_15px_rgba(220,38,38,0.4)] group-hover:scale-110 transition-all duration-300">
+          <a href="#home" onClick={(e) => scrollToSection(e, 'home')} className="flex items-center gap-3 cursor-pointer group focus:outline-none">
+            <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-indigo-500 to-purple-600 flex items-center justify-center text-white font-bold shadow-[0_0_15px_rgba(99,102,241,0.4)] group-hover:scale-110 transition-all duration-300">
               D
             </div>
             <span className="text-xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-zinc-100 to-zinc-400 tracking-tight group-hover:text-white transition-colors duration-300">
@@ -295,12 +305,13 @@ export default function App() {
               <a 
                 key={item.id} 
                 href={`#${item.id}`}
+                onClick={(e) => scrollToSection(e, item.id)}
                 className={`text-sm font-medium transition-colors relative group py-1 focus:outline-none
                   ${activeSection === item.id ? 'text-white' : 'text-zinc-400 hover:text-white'}
                 `}
               >
                 {item.label}
-                <span className={`absolute -bottom-1 left-1/2 -translate-x-1/2 h-0.5 bg-red-500 transition-all duration-300 rounded-full
+                <span className={`absolute -bottom-1 left-1/2 -translate-x-1/2 h-0.5 bg-indigo-400 transition-all duration-300 rounded-full
                   ${activeSection === item.id ? 'w-full' : 'w-0 group-hover:w-full opacity-50'}
                 `} />
               </a>
@@ -308,7 +319,8 @@ export default function App() {
             
             <a 
               href="#contact"
-              className={`px-4 py-2 rounded-lg text-sm font-medium transition-colors border focus:outline-none ${activeSection === 'contact' ? 'bg-red-600 text-white border-red-600 shadow-[0_0_15px_rgba(220,38,38,0.4)]' : 'bg-red-500/10 text-red-400 border-red-500/20 hover:bg-red-500/20'} hover:-translate-y-0.5`}
+              onClick={(e) => scrollToSection(e, 'contact')}
+              className={`px-4 py-2 rounded-lg text-sm font-medium transition-colors border focus:outline-none ${activeSection === 'contact' ? 'bg-indigo-500 text-white border-indigo-500 shadow-[0_0_15px_rgba(99,102,241,0.4)]' : 'bg-indigo-500/10 text-indigo-400 border-indigo-500/20 hover:bg-indigo-500/20'} hover:-translate-y-0.5`}
             >
               Contact Me
             </a>
@@ -324,19 +336,19 @@ export default function App() {
           <div className="grid md:grid-cols-12 gap-8 lg:gap-12 items-center w-full">
             
             <div className="md:col-span-7 lg:col-span-7 space-y-6 animate-fade-in-up">
-              <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-zinc-900/50 border border-amber-500/30 backdrop-blur-md w-fit hover:bg-amber-500/10 hover:border-amber-500/50 hover:-translate-y-1 hover:shadow-[0_0_15px_rgba(245,158,11,0.2)] transition-all cursor-default">
+              <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-zinc-900/50 border border-emerald-500/30 backdrop-blur-md w-fit hover:bg-emerald-500/10 hover:border-emerald-500/50 hover:-translate-y-1 hover:shadow-[0_0_15px_rgba(16,185,129,0.2)] transition-all cursor-default">
                 <span className="relative flex h-2.5 w-2.5">
-                  <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-amber-400 opacity-75"></span>
-                  <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-amber-500"></span>
+                  <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
+                  <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-emerald-500"></span>
                 </span>
-                <span className="text-amber-400 text-sm font-medium tracking-wide">Available for Software & Embedded Roles</span>
+                <span className="text-emerald-400 text-sm font-medium tracking-wide">Available for Software & Embedded Roles</span>
               </div>
               
               <div className="space-y-3">
                 <h1 className="text-5xl md:text-7xl font-extrabold text-white tracking-tighter leading-tight drop-shadow-lg">
                   DILIP KUMAR A N
                 </h1>
-                <h2 className="text-xl md:text-2xl font-medium text-transparent bg-clip-text bg-gradient-to-r from-red-400 to-amber-400 tracking-tight">
+                <h2 className="text-xl md:text-2xl font-medium text-transparent bg-clip-text bg-gradient-to-r from-indigo-400 to-purple-400 tracking-tight">
                   Electronics and Embedded Systems Engineer
                 </h2>
               </div>
@@ -345,12 +357,12 @@ export default function App() {
                 Engineering graduate with industry experience, seeking a challenging role to apply technical and problem-solving skills while growing in the field of electronics, embedded systems, and software development.
               </p>
 
-              {/* Call To Action Buttons */}
+              {/* Call To Action Buttons (CV, Contact, GitHub) */}
               <div className="flex flex-wrap items-center gap-4 pt-6">
-                <a href="/Dilip_Kumar_CV.pdf" download="Dilip_Kumar_CV.pdf" className="h-12 px-7 rounded-xl bg-red-600 text-white font-bold flex items-center gap-2 hover:bg-red-500 hover:-translate-y-1.5 hover:shadow-[0_10px_25px_rgba(220,38,38,0.4)] active:scale-95 transition-all duration-300 shadow-[0_0_15px_rgba(220,38,38,0.2)]">
+                <a href="/Dilip_Kumar_CV.pdf" download="Dilip_Kumar_CV.pdf" className="h-12 px-7 rounded-xl bg-indigo-500 text-white font-bold flex items-center gap-2 hover:bg-indigo-400 hover:-translate-y-1.5 hover:shadow-[0_10px_25px_rgba(99,102,241,0.4)] active:scale-95 transition-all duration-300 shadow-[0_0_15px_rgba(99,102,241,0.2)]">
                   <Download size={18} className="animate-bounce mt-1" /> Download CV
                 </a>
-                <a href="#contact" className="h-12 px-7 rounded-xl bg-zinc-100 text-zinc-950 font-bold flex items-center gap-2 hover:bg-white hover:-translate-y-1.5 hover:shadow-[0_10px_25px_rgba(255,255,255,0.3)] active:scale-95 transition-all duration-300 shadow-[0_0_15px_rgba(255,255,255,0.1)]">
+                <a href="#contact" onClick={(e) => scrollToSection(e, 'contact')} className="h-12 px-7 rounded-xl bg-zinc-100 text-zinc-950 font-bold flex items-center gap-2 hover:bg-white hover:-translate-y-1.5 hover:shadow-[0_10px_25px_rgba(255,255,255,0.3)] active:scale-95 transition-all duration-300 shadow-[0_0_15px_rgba(255,255,255,0.1)]">
                   <Mail size={18} /> Get in Touch
                 </a>
                 <a href="https://github.com/dilipgowdaan" target="_blank" rel="noreferrer" className="h-12 px-7 rounded-xl bg-zinc-900/50 backdrop-blur-md border border-zinc-700 text-zinc-100 font-medium flex items-center gap-2 hover:bg-zinc-800 hover:-translate-y-1.5 hover:shadow-[0_10px_20px_rgba(0,0,0,0.4)] active:scale-95 transition-all duration-300 shadow-[0_4px_10px_rgba(0,0,0,0.2)]">
@@ -362,7 +374,7 @@ export default function App() {
             {/* Profile Image Holder */}
             <div className="hidden md:flex md:col-span-5 lg:col-span-5 justify-end animate-fade-in-up" style={{ animationDelay: '0.2s' }}>
               <div className="relative group cursor-default hover:scale-105 transition-transform duration-700">
-                <div className="absolute -inset-2 bg-gradient-to-r from-red-600 to-amber-500 rounded-full blur-2xl opacity-40 group-hover:opacity-70 transition duration-1000 group-hover:duration-500 animate-blob"></div>
+                <div className="absolute -inset-2 bg-gradient-to-r from-indigo-500 to-purple-600 rounded-full blur-2xl opacity-40 group-hover:opacity-70 transition duration-1000 group-hover:duration-500 animate-blob"></div>
                 
                 <div className="relative w-80 h-80 rounded-full p-2 bg-zinc-900/50 backdrop-blur-xl border border-zinc-700/50 shadow-2xl">
                   <img 
@@ -374,7 +386,7 @@ export default function App() {
                       e.target.nextSibling.style.display = 'flex';
                     }}
                   />
-                  <div className="hidden w-full h-full rounded-full items-center justify-center bg-gradient-to-br from-red-900/50 to-amber-900/50 text-6xl font-bold text-zinc-300 border border-zinc-700/50">
+                  <div className="hidden w-full h-full rounded-full items-center justify-center bg-gradient-to-br from-indigo-900/50 to-purple-900/50 text-6xl font-bold text-zinc-300 border border-zinc-700/50">
                     DK
                   </div>
                 </div>
@@ -388,21 +400,21 @@ export default function App() {
         <section id="experience" className="w-full max-w-5xl mx-auto px-6 py-16 scroll-mt-[72px]">
           <div className="animate-fade-in-up w-full">
             <SectionLabel text="Professional Experience" icon={Briefcase} delay="0.1s" />
-            <div className="bg-zinc-900/40 backdrop-blur-xl border border-zinc-700/50 rounded-3xl p-8 md:p-12 shadow-2xl relative overflow-hidden group hover:border-zinc-500/50 hover:shadow-[0_10px_40px_-10px_rgba(220,38,38,0.15)] hover:-translate-y-2 transition-all duration-500">
+            <div className="bg-zinc-900/40 backdrop-blur-xl border border-zinc-700/50 rounded-3xl p-8 md:p-12 shadow-2xl relative overflow-hidden group hover:border-zinc-500/50 hover:shadow-[0_10px_40px_-10px_rgba(99,102,241,0.15)] hover:-translate-y-2 transition-all duration-500">
               <div className="absolute top-0 right-0 p-12 opacity-5 pointer-events-none group-hover:scale-110 group-hover:-translate-y-4 group-hover:opacity-10 transition-all duration-700">
-                <Monitor size={150} className="text-red-500/30" />
+                <Monitor size={150} className="text-indigo-500" />
               </div>
               <div className="relative z-10 flex flex-col md:flex-row md:items-center justify-between gap-6 mb-8">
                 <div>
                   <h3 className="text-3xl font-bold text-white mb-2">Technical Support Engineer</h3>
-                  <p className="text-xl text-amber-400 font-medium">URSC / ISRO <span className="text-zinc-500 text-sm ml-2">(Sree Venkateshwara)</span></p>
+                  <p className="text-xl text-indigo-400 font-medium">URSC / ISRO <span className="text-zinc-500 text-sm ml-2">(Sree Venkateshwara)</span></p>
                 </div>
-                <span className="px-4 py-1.5 text-sm font-medium rounded-lg border bg-zinc-800/80 border-zinc-700/50 text-zinc-300 w-fit backdrop-blur-sm group-hover:border-red-500/30 transition-colors">Mar 2022 — Dec 2023</span>
+                <span className="px-4 py-1.5 text-sm font-medium rounded-lg border bg-zinc-800/80 border-zinc-700/50 text-zinc-300 w-fit backdrop-blur-sm group-hover:border-indigo-500/30 transition-colors">Mar 2022 — Dec 2023</span>
               </div>
               <ul className="relative z-10 space-y-5 max-w-4xl text-zinc-400 text-lg">
-                <li className="flex items-start group/item"><ChevronRight size={20} className="text-red-500/50 group-hover/item:text-red-400 group-hover/item:translate-x-1 transition-all mr-4 mt-1 shrink-0" /> Diagnosed and resolved system-level hardware and software issues across desktops and networks.</li>
-                <li className="flex items-start group/item"><ChevronRight size={20} className="text-red-500/50 group-hover/item:text-red-400 group-hover/item:translate-x-1 transition-all mr-4 mt-1 shrink-0" /> Automated troubleshooting workflows and improved overall system reliability.</li>
-                <li className="flex items-start group/item"><ChevronRight size={20} className="text-red-500/50 group-hover/item:text-red-400 group-hover/item:translate-x-1 transition-all mr-4 mt-1 shrink-0" /> Worked extensively with low-level hardware and software interaction, debugging OS and drivers.</li>
+                <li className="flex items-start group/item"><ChevronRight size={20} className="text-indigo-500/50 group-hover/item:text-indigo-400 group-hover/item:translate-x-1 transition-all mr-4 mt-1 shrink-0" /> Diagnosed and resolved system-level hardware and software issues across desktops and networks.</li>
+                <li className="flex items-start group/item"><ChevronRight size={20} className="text-indigo-500/50 group-hover/item:text-indigo-400 group-hover/item:translate-x-1 transition-all mr-4 mt-1 shrink-0" /> Automated troubleshooting workflows and improved overall system reliability.</li>
+                <li className="flex items-start group/item"><ChevronRight size={20} className="text-indigo-500/50 group-hover/item:text-indigo-400 group-hover/item:translate-x-1 transition-all mr-4 mt-1 shrink-0" /> Worked extensively with low-level hardware and software interaction, debugging OS and drivers.</li>
               </ul>
             </div>
           </div>
@@ -434,31 +446,31 @@ export default function App() {
               <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-10">
                 <div>
                   <h3 className="text-sm font-semibold text-zinc-200 uppercase tracking-widest mb-5 flex items-center gap-3">
-                    <div className="p-2 rounded-lg bg-zinc-800/80 border border-zinc-700 text-red-400 shadow-inner"><Code size={16}/></div> Programming & Web
+                    <div className="p-2 rounded-lg bg-zinc-800/80 border border-zinc-700 text-indigo-400 shadow-inner"><Code size={16}/></div> Programming & Web
                   </h3>
                   <div className="flex flex-wrap gap-2.5">
                     {['React', 'React Native', 'C', 'Python', 'HTML', 'SQL'].map(s => (
-                      <span key={s} className="px-3 py-1.5 text-xs font-medium rounded-md border bg-zinc-900/80 border-zinc-700/80 text-zinc-300 hover:bg-red-500/10 hover:text-red-300 hover:border-red-500/50 hover:-translate-y-1 hover:shadow-lg transition-all cursor-default">{s}</span>
+                      <span key={s} className="px-3 py-1.5 text-xs font-medium rounded-md border bg-zinc-900/80 border-zinc-700/80 text-zinc-300 hover:bg-indigo-500/10 hover:text-indigo-300 hover:border-indigo-500/50 hover:-translate-y-1 hover:shadow-lg transition-all cursor-default">{s}</span>
                     ))}
                   </div>
                 </div>
                 <div>
                   <h3 className="text-sm font-semibold text-zinc-200 uppercase tracking-widest mb-5 flex items-center gap-3">
-                    <div className="p-2 rounded-lg bg-zinc-800/80 border border-zinc-700 text-amber-400 shadow-inner"><Server size={16}/></div> Software & Tools
+                    <div className="p-2 rounded-lg bg-zinc-800/80 border border-zinc-700 text-cyan-400 shadow-inner"><Server size={16}/></div> Software & Tools
                   </h3>
                   <div className="flex flex-wrap gap-2.5">
                     {['Firebase', 'Vercel', 'Supabase', 'Flask', 'Expo', 'VS Code', 'Arduino IDE', 'MATLAB'].map(s => (
-                      <span key={s} className="px-3 py-1.5 text-xs font-medium rounded-md border bg-zinc-900/80 border-zinc-700/80 text-zinc-300 hover:bg-amber-500/10 hover:text-amber-300 hover:border-amber-500/50 hover:-translate-y-1 hover:shadow-lg transition-all cursor-default">{s}</span>
+                      <span key={s} className="px-3 py-1.5 text-xs font-medium rounded-md border bg-zinc-900/80 border-zinc-700/80 text-zinc-300 hover:bg-cyan-500/10 hover:text-cyan-300 hover:border-cyan-500/50 hover:-translate-y-1 hover:shadow-lg transition-all cursor-default">{s}</span>
                     ))}
                   </div>
                 </div>
                 <div>
                   <h3 className="text-sm font-semibold text-zinc-200 uppercase tracking-widest mb-5 flex items-center gap-3">
-                    <div className="p-2 rounded-lg bg-zinc-800/80 border border-zinc-700 text-orange-400 shadow-inner"><Cpu size={16}/></div> Hardware Platforms
+                    <div className="p-2 rounded-lg bg-zinc-800/80 border border-zinc-700 text-emerald-400 shadow-inner"><Cpu size={16}/></div> Hardware Platforms
                   </h3>
                   <div className="flex flex-wrap gap-2.5">
                     {['Verilog', 'System Verilog', 'FPGA Boards', 'Raspberry Pi', 'Arduino Uno', 'ESP8266/ESP32'].map(s => (
-                      <span key={s} className="px-3 py-1.5 text-xs font-medium rounded-md border bg-zinc-900/80 border-zinc-700/80 text-zinc-300 hover:bg-orange-500/10 hover:text-orange-300 hover:border-orange-500/50 hover:-translate-y-1 hover:shadow-lg transition-all cursor-default">{s}</span>
+                      <span key={s} className="px-3 py-1.5 text-xs font-medium rounded-md border bg-zinc-900/80 border-zinc-700/80 text-zinc-300 hover:bg-emerald-500/10 hover:text-emerald-300 hover:border-emerald-500/50 hover:-translate-y-1 hover:shadow-lg transition-all cursor-default">{s}</span>
                     ))}
                   </div>
                 </div>
@@ -482,7 +494,7 @@ export default function App() {
                     <p className="text-zinc-400 mt-1">{edu.inst}</p>
                   </div>
                   <div className="mt-4 md:mt-0 flex items-center gap-6">
-                    <span className="px-3 py-1.5 rounded-lg bg-zinc-900/80 border border-zinc-700/50 text-zinc-300 font-mono text-sm shadow-inner group-hover:border-red-500/50 group-hover:text-red-200 transition-colors">
+                    <span className="px-3 py-1.5 rounded-lg bg-zinc-900/80 border border-zinc-700/50 text-zinc-300 font-mono text-sm shadow-inner group-hover:border-indigo-500/50 group-hover:text-indigo-200 transition-colors">
                       {edu.score}
                     </span>
                     <span className="text-zinc-500 font-mono text-sm w-12 text-right">{edu.year}</span>
@@ -525,7 +537,7 @@ export default function App() {
                  <div className="flex flex-wrap gap-4 relative z-10">
                     
                     {/* Rocket Icon bounces and shoots diagonal */}
-                    <div className="px-5 py-3 rounded-xl bg-zinc-800/80 border border-zinc-700/50 text-zinc-200 text-sm font-medium flex items-center gap-3 hover:border-red-500/50 hover:bg-red-500/10 hover:-translate-y-1 hover:shadow-[0_5px_15px_rgba(239,68,68,0.15)] transition-all cursor-default group">
+                    <div className="px-5 py-3 rounded-xl bg-zinc-800/80 border border-zinc-700/50 text-zinc-200 text-sm font-medium flex items-center gap-3 hover:border-red-500/50 hover:bg-red-500/10 hover:-translate-y-1 hover:shadow-[0_5px_15px_rgba(248,113,113,0.15)] transition-all cursor-default group">
                       <Rocket size={18} className="text-red-400 group-hover:-translate-y-1 group-hover:translate-x-1 group-hover:scale-110 transition-transform duration-300" /> Aerospace Technologies
                     </div>
 
@@ -535,8 +547,8 @@ export default function App() {
                     </div>
 
                     {/* Globe tilts and zooms */}
-                    <div className="px-5 py-3 rounded-xl bg-zinc-800/80 border border-zinc-700/50 text-zinc-200 text-sm font-medium flex items-center gap-3 hover:border-red-500/50 hover:bg-red-500/10 hover:-translate-y-1 hover:shadow-[0_5px_15px_rgba(239,68,68,0.15)] transition-all cursor-default group">
-                      <Globe size={18} className="text-red-500 group-hover:-rotate-12 group-hover:scale-110 transition-transform duration-300" /> Astronomy & Space
+                    <div className="px-5 py-3 rounded-xl bg-zinc-800/80 border border-zinc-700/50 text-zinc-200 text-sm font-medium flex items-center gap-3 hover:border-purple-500/50 hover:bg-purple-500/10 hover:-translate-y-1 hover:shadow-[0_5px_15px_rgba(168,85,247,0.15)] transition-all cursor-default group">
+                      <Globe size={18} className="text-purple-400 group-hover:-rotate-12 group-hover:scale-110 transition-transform duration-300" /> Astronomy & Space
                     </div>
 
                     {/* Lightbulb glows and pops */}
@@ -545,18 +557,18 @@ export default function App() {
                     </div>
 
                     {/* Microscope scales up to inspect */}
-                    <div className="px-5 py-3 rounded-xl bg-zinc-800/80 border border-zinc-700/50 text-zinc-200 text-sm font-medium flex items-center gap-3 hover:border-amber-500/50 hover:bg-amber-500/10 hover:-translate-y-1 hover:shadow-[0_5px_15px_rgba(245,158,11,0.15)] transition-all cursor-default group">
-                      <Microscope size={18} className="text-amber-500 group-hover:scale-110 transition-transform duration-300" /> Scientific Research
+                    <div className="px-5 py-3 rounded-xl bg-zinc-800/80 border border-zinc-700/50 text-zinc-200 text-sm font-medium flex items-center gap-3 hover:border-teal-500/50 hover:bg-teal-500/10 hover:-translate-y-1 hover:shadow-[0_5px_15px_rgba(20,184,166,0.15)] transition-all cursor-default group">
+                      <Microscope size={18} className="text-teal-400 group-hover:scale-110 transition-transform duration-300" /> Scientific Research
                     </div>
 
                     {/* Activity (Cricket) swings like a bat */}
-                    <div className="px-5 py-3 rounded-xl bg-zinc-800/80 border border-zinc-700/50 text-zinc-200 text-sm font-medium flex items-center gap-3 hover:border-red-400/50 hover:bg-red-400/10 hover:-translate-y-1 hover:shadow-[0_5px_15px_rgba(248,113,113,0.15)] transition-all cursor-default group">
-                      <Activity size={18} className="text-red-400 group-hover:rotate-[20deg] group-hover:scale-110 transition-transform duration-300" /> Cricket
+                    <div className="px-5 py-3 rounded-xl bg-zinc-800/80 border border-zinc-700/50 text-zinc-200 text-sm font-medium flex items-center gap-3 hover:border-emerald-500/50 hover:bg-emerald-500/10 hover:-translate-y-1 hover:shadow-[0_5px_15px_rgba(16,185,129,0.15)] transition-all cursor-default group">
+                      <Activity size={18} className="text-emerald-400 group-hover:rotate-[20deg] group-hover:scale-110 transition-transform duration-300" /> Cricket
                     </div>
 
                     {/* Gamepad tilts up */}
-                    <div className="px-5 py-3 rounded-xl bg-zinc-800/80 border border-zinc-700/50 text-zinc-200 text-sm font-medium flex items-center gap-3 hover:border-amber-400/50 hover:bg-amber-400/10 hover:-translate-y-1 hover:shadow-[0_5px_15px_rgba(251,191,36,0.15)] transition-all cursor-default group">
-                      <Gamepad2 size={18} className="text-amber-400 group-hover:-translate-y-1 group-hover:-rotate-[15deg] transition-transform duration-300" /> Mobile Games
+                    <div className="px-5 py-3 rounded-xl bg-zinc-800/80 border border-zinc-700/50 text-zinc-200 text-sm font-medium flex items-center gap-3 hover:border-indigo-500/50 hover:bg-indigo-500/10 hover:-translate-y-1 hover:shadow-[0_5px_15px_rgba(99,102,241,0.15)] transition-all cursor-default group">
+                      <Gamepad2 size={18} className="text-indigo-400 group-hover:-translate-y-1 group-hover:-rotate-[15deg] transition-transform duration-300" /> Mobile Games
                     </div>
 
                  </div>
@@ -570,7 +582,7 @@ export default function App() {
         <section id="contact" className="w-full max-w-3xl mx-auto px-6 py-16 scroll-mt-[72px]">
           <div className="bg-zinc-900/40 backdrop-blur-xl border border-zinc-700/50 rounded-3xl p-8 md:p-12 shadow-2xl relative overflow-hidden animate-fade-in-up hover:border-zinc-500/50 hover:shadow-[0_10px_40px_-10px_rgba(0,0,0,0.5)] transition-all duration-500">
             <div className="absolute top-0 right-0 p-12 opacity-5 pointer-events-none">
-              <Mail size={200} className="text-red-600/30" />
+              <Mail size={200} className="text-indigo-500" />
             </div>
             <div className="relative z-10 mb-10">
               <h1 className="text-4xl font-bold text-white mb-2">Let's Connect</h1>
@@ -582,14 +594,14 @@ export default function App() {
                   <label className="text-sm font-medium text-zinc-300">Your Name</label>
                   <input 
                     type="text" required value={formData.name} onChange={(e) => setFormData({...formData, name: e.target.value})}
-                    className="w-full bg-zinc-950/50 border border-zinc-800 rounded-xl px-5 py-3 text-zinc-100 focus:outline-none focus:border-red-500 focus:bg-zinc-900 transition-all hover:border-zinc-600"
+                    className="w-full bg-zinc-950/50 border border-zinc-800 rounded-xl px-5 py-3 text-zinc-100 focus:outline-none focus:border-indigo-500 focus:bg-zinc-900 transition-all hover:border-zinc-600"
                   />
                 </div>
                 <div className="space-y-2">
                   <label className="text-sm font-medium text-zinc-300">Your Email</label>
                   <input 
                     type="email" required value={formData.email} onChange={(e) => setFormData({...formData, email: e.target.value})}
-                    className="w-full bg-zinc-950/50 border border-zinc-800 rounded-xl px-5 py-3 text-zinc-100 focus:outline-none focus:border-red-500 focus:bg-zinc-900 transition-all hover:border-zinc-600"
+                    className="w-full bg-zinc-950/50 border border-zinc-800 rounded-xl px-5 py-3 text-zinc-100 focus:outline-none focus:border-indigo-500 focus:bg-zinc-900 transition-all hover:border-zinc-600"
                   />
                 </div>
               </div>
@@ -597,12 +609,12 @@ export default function App() {
                 <label className="text-sm font-medium text-zinc-300">Message</label>
                 <textarea 
                   required rows={5} value={formData.message} onChange={(e) => setFormData({...formData, message: e.target.value})}
-                  className="w-full bg-zinc-950/50 border border-zinc-800 rounded-xl px-5 py-3 text-zinc-100 focus:outline-none focus:border-red-500 focus:bg-zinc-900 transition-all resize-none hover:border-zinc-600"
+                  className="w-full bg-zinc-950/50 border border-zinc-800 rounded-xl px-5 py-3 text-zinc-100 focus:outline-none focus:border-indigo-500 focus:bg-zinc-900 transition-all resize-none hover:border-zinc-600"
                 ></textarea>
               </div>
               <button 
                 type="submit" disabled={submitStatus === 'submitting'}
-                className="w-full md:w-auto px-10 py-3 bg-red-600 hover:bg-red-700 text-white font-bold rounded-xl transition-all shadow-[0_0_20px_rgba(220,38,38,0.3)] hover:-translate-y-1 hover:shadow-[0_10px_25px_rgba(220,38,38,0.4)] active:scale-95 disabled:opacity-50 disabled:hover:translate-y-0 flex items-center justify-center gap-2 mt-4"
+                className="w-full md:w-auto px-10 py-3 bg-indigo-500 hover:bg-indigo-600 text-white font-bold rounded-xl transition-all shadow-[0_0_20px_rgba(99,102,241,0.3)] hover:-translate-y-1 hover:shadow-[0_10px_25px_rgba(99,102,241,0.4)] active:scale-95 disabled:opacity-50 disabled:hover:translate-y-0 flex items-center justify-center gap-2 mt-4"
               >
                 {submitStatus === 'idle' && <><Send size={18} /> Send Message</>}
                 {submitStatus === 'submitting' && 'Transmitting...'}
@@ -616,7 +628,7 @@ export default function App() {
       </main>
 
       {/* --- FOOTER --- */}
-      <footer className="fixed bottom-0 left-0 right-0 z-50 border-t border-zinc-800/80 bg-[#0a0505]/95 backdrop-blur-xl w-full h-[72px] flex items-center text-xs md:text-sm text-zinc-400 px-6">
+      <footer className="fixed bottom-0 left-0 right-0 z-50 border-t border-zinc-800/80 bg-[#050505]/95 backdrop-blur-xl w-full h-[72px] flex items-center text-xs md:text-sm text-zinc-400 px-6">
         <div className="max-w-6xl mx-auto flex justify-between items-center w-full">
           
           <div className="flex items-center gap-2">
@@ -632,7 +644,7 @@ export default function App() {
           <div className="flex gap-4 items-center">
             <a href="https://github.com/dilipgowdaan" target="_blank" rel="noreferrer" className="hover:text-white hover:-translate-y-1 transition-all"><Github size={16} /></a>
             <a href="https://linkedin.com/in/dilipkumaran" target="_blank" rel="noreferrer" className="hover:text-white hover:-translate-y-1 transition-all"><Linkedin size={16} /></a>
-            <a href="#contact" className="hover:text-red-500 hover:-translate-y-1 transition-all"><Mail size={16} /></a>
+            <a href="#contact" onClick={(e) => scrollToSection(e, 'contact')} className="hover:text-indigo-400 hover:-translate-y-1 transition-all"><Mail size={16} /></a>
           </div>
 
         </div>
