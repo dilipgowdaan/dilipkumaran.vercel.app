@@ -4,7 +4,8 @@ import {
   Terminal, Cpu, Monitor, Zap, GraduationCap, 
   ChevronRight, Send, CheckCircle, XCircle, Download,
   Database, Smartphone, Server, Briefcase, Code,
-  Trophy, Gamepad2, Activity, Medal
+  Trophy, Gamepad2, Activity, Medal,
+  Rocket, Car, Telescope, Lightbulb, Microscope
 } from 'lucide-react';
 
 // --- DATA STRUCTURES ---
@@ -502,15 +503,27 @@ export default function App() {
             <div>
               <SectionLabel text="Beyond Academics" icon={Gamepad2} />
               <div className="bg-zinc-900/40 backdrop-blur-xl border border-zinc-700/50 rounded-3xl p-8 shadow-2xl relative overflow-hidden group hover:border-zinc-500/50 transition-colors duration-500 h-full">
-                 <div className="flex flex-wrap gap-4 relative z-10">
-                    <div className="px-5 py-3 rounded-xl bg-zinc-800/80 border border-zinc-700/50 text-zinc-200 font-medium flex items-center gap-3 hover:border-emerald-500/50 hover:bg-emerald-500/10 transition-all cursor-default">
-                      <Activity size={18} className="text-emerald-400" /> Cricket
+                 <div className="flex flex-wrap gap-3 relative z-10">
+                    <div className="px-4 py-2.5 rounded-xl bg-zinc-800/80 border border-zinc-700/50 text-zinc-200 text-sm font-medium flex items-center gap-2 hover:border-red-500/50 hover:bg-red-500/10 transition-all cursor-default">
+                      <Rocket size={16} className="text-red-400" /> Aerospace Technologies
                     </div>
-                    <div className="px-5 py-3 rounded-xl bg-zinc-800/80 border border-zinc-700/50 text-zinc-200 font-medium flex items-center gap-3 hover:border-indigo-500/50 hover:bg-indigo-500/10 transition-all cursor-default">
-                      <Gamepad2 size={18} className="text-indigo-400" /> Mobile Games
+                    <div className="px-4 py-2.5 rounded-xl bg-zinc-800/80 border border-zinc-700/50 text-zinc-200 text-sm font-medium flex items-center gap-2 hover:border-orange-500/50 hover:bg-orange-500/10 transition-all cursor-default">
+                      <Car size={16} className="text-orange-400" /> Formula 1 & Motorsport
                     </div>
-                    <div className="px-5 py-3 rounded-xl bg-zinc-800/80 border border-zinc-700/50 text-zinc-200 font-medium flex items-center gap-3 hover:border-cyan-500/50 hover:bg-cyan-500/10 transition-all cursor-default">
-                      <Code size={18} className="text-cyan-400" /> Coding & Technology
+                    <div className="px-4 py-2.5 rounded-xl bg-zinc-800/80 border border-zinc-700/50 text-zinc-200 text-sm font-medium flex items-center gap-2 hover:border-purple-500/50 hover:bg-purple-500/10 transition-all cursor-default">
+                      <Telescope size={16} className="text-purple-400" /> Astronomy & Space
+                    </div>
+                    <div className="px-4 py-2.5 rounded-xl bg-zinc-800/80 border border-zinc-700/50 text-zinc-200 text-sm font-medium flex items-center gap-2 hover:border-yellow-500/50 hover:bg-yellow-500/10 transition-all cursor-default">
+                      <Lightbulb size={16} className="text-yellow-400" /> Emerging Innovations
+                    </div>
+                    <div className="px-4 py-2.5 rounded-xl bg-zinc-800/80 border border-zinc-700/50 text-zinc-200 text-sm font-medium flex items-center gap-2 hover:border-teal-500/50 hover:bg-teal-500/10 transition-all cursor-default">
+                      <Microscope size={16} className="text-teal-400" /> Scientific Research
+                    </div>
+                    <div className="px-4 py-2.5 rounded-xl bg-zinc-800/80 border border-zinc-700/50 text-zinc-200 text-sm font-medium flex items-center gap-2 hover:border-emerald-500/50 hover:bg-emerald-500/10 transition-all cursor-default">
+                      <Activity size={16} className="text-emerald-400" /> Cricket
+                    </div>
+                    <div className="px-4 py-2.5 rounded-xl bg-zinc-800/80 border border-zinc-700/50 text-zinc-200 text-sm font-medium flex items-center gap-2 hover:border-indigo-500/50 hover:bg-indigo-500/10 transition-all cursor-default">
+                      <Gamepad2 size={16} className="text-indigo-400" /> Mobile Games
                     </div>
                  </div>
               </div>
