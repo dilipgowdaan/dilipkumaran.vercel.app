@@ -6,8 +6,6 @@ import {
   Database, Smartphone, Server, Briefcase, Code
 } from 'lucide-react';
 
-// --- DATA STRUCTURES ---
-
 const softwareProjects = [
   {
     title: "VaidyaMithra - Hospital Management",
@@ -15,7 +13,7 @@ const softwareProjects = [
     tags: ["React", "Firebase", "LLMs", "Vercel"],
     desc: "A complete Hospital Management System featuring an AI-powered health assistant that analyzes symptoms. Implemented secure cloud architecture and real-time status updates.",
     images: [
-      "Vaidya-1.png",
+      "https://images.unsplash.com/photo-1576091160550-2173ff9e5ee5?q=80&w=800&auto=format&fit=crop",
       "https://images.unsplash.com/photo-1551288049-bebda4e38f71?q=80&w=800&auto=format&fit=crop",
       "https://images.unsplash.com/photo-1504868584819-f8e8b4b6d7e3?q=80&w=800&auto=format&fit=crop"
     ]
@@ -118,11 +116,12 @@ const ProjectCard = ({ project, isHovered, onMouseEnter, onMouseLeave }) => {
             key={i}
             src={img} 
             alt="Project"
-            className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-1000 ease-in-out ${i === imgIdx ? (isHovered ? 'opacity-40' : 'opacity-10') : 'opacity-0'}`}
+            className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-1000 ease-in-out ${i === imgIdx ? (isHovered ? 'opacity-40' : 'opacity-20') : 'opacity-0'}`}
           />
         ))}
-        <div className="absolute inset-0 bg-gradient-to-t from-[#050505] via-[#050505]/80 to-transparent" />
-        <div className={`absolute inset-0 transition-opacity duration-700 ${isHovered ? 'opacity-0' : 'opacity-60 bg-[#050505]/50'}`} />
+        <div className="absolute inset-0 bg-gradient-to-t from-[#050505] via-[#050505]/70 to-transparent" />
+        {/* Significantly reduced background darkness to make images more visible */}
+        <div className={`absolute inset-0 transition-opacity duration-700 ${isHovered ? 'opacity-0' : 'opacity-40 bg-[#050505]/30'}`} />
       </div>
 
       <div className="relative z-10 flex flex-col justify-end h-full p-6 md:p-8">
@@ -140,13 +139,13 @@ const ProjectCard = ({ project, isHovered, onMouseEnter, onMouseLeave }) => {
             </div>
           </div>
           
-          <h3 className={`font-bold transition-all duration-500 mb-3 ${isHovered ? 'text-2xl text-white' : 'text-xl text-zinc-300 md:truncate'}`}>
+          <h3 className={`font-bold transition-all duration-500 mb-3 ${isHovered ? 'text-2xl text-white' : 'text-xl text-zinc-200 md:truncate'}`}>
             {project.title}
           </h3>
           
           <div className={`grid transition-all duration-700 ease-in-out ${isHovered ? 'grid-rows-[1fr] opacity-100 mt-2' : 'grid-rows-[0fr] opacity-0 md:opacity-0 opacity-100 grid-rows-[1fr] md:grid-rows-[0fr]'}`}>
             <div className="overflow-hidden">
-              <p className="text-zinc-400 text-sm md:text-base leading-relaxed">
+              <p className="text-zinc-300 text-sm md:text-base leading-relaxed">
                 {project.desc}
               </p>
             </div>
@@ -207,11 +206,16 @@ export default function App() {
     e.preventDefault();
     setSubmitStatus('submitting');
     
-    // Using hardcoded keys avoids build environment compatibility issues 
-    // and correctly sends the form without Bad Request errors.
-    const serviceId = 'service_bvptl1g'; 
-    const templateId = 'template_q9d2t3t';
-    const publicKey = 'jMeHyyiKaYCLnBG4o';
+    const serviceId = import.meta.env.VITE_EMAILJS_SERVICE_ID; 
+    const templateId = import.meta.env.VITE_EMAILJS_TEMPLATE_ID;
+    const publicKey = import.meta.env.VITE_EMAILJS_PUBLIC_KEY;
+
+    if (!serviceId || !templateId || !publicKey) {
+      console.error("EmailJS Environment variables are missing!");
+      setSubmitStatus('error');
+      setTimeout(() => setSubmitStatus('idle'), 3000);
+      return;
+    }
 
     try {
       const response = await fetch('https://api.emailjs.com/api/v1.0/email/send', {
@@ -249,7 +253,8 @@ export default function App() {
   ];
 
   return (
-    <div className="min-h-screen bg-[#050505] text-zinc-300 font-sans selection:bg-indigo-500/30 selection:text-indigo-200 relative pb-[40px] custom-scrollbar">
+    // Perfect framing: pb-[72px] guarantees content never hides behind the 72px footer
+    <div className="min-h-screen bg-[#050505] text-zinc-300 font-sans selection:bg-indigo-500/30 selection:text-indigo-200 relative pb-[72px] custom-scrollbar">
       
       <div className="fixed inset-0 z-0 pointer-events-none">
         <div className="absolute top-[-10%] left-[-10%] w-[500px] h-[500px] bg-indigo-600/20 rounded-full mix-blend-screen filter blur-[100px] opacity-50 animate-blob" style={{ transform: `translate(${mousePosition.x}px, ${mousePosition.y}px)` }} />
@@ -297,48 +302,75 @@ export default function App() {
 
       <main className="relative z-10 w-full pt-[72px] flex flex-col items-center">
         
-        <section id="home" className="w-full max-w-6xl mx-auto px-6 pt-12 pb-20 scroll-mt-[72px]">
-          <div className="space-y-6 animate-fade-in-up">
-            <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-zinc-900/50 border border-emerald-500/30 backdrop-blur-md w-fit">
-              <span className="relative flex h-2.5 w-2.5">
-                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
-                <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-emerald-500"></span>
-              </span>
-              <span className="text-emerald-400 text-sm font-medium tracking-wide">Available for Software & Embedded Roles</span>
-            </div>
+        <section id="home" className="w-full max-w-6xl mx-auto px-6 pt-16 pb-20 scroll-mt-[72px]">
+          <div className="grid md:grid-cols-2 gap-12 items-center">
             
-            <div className="space-y-3">
-              <h1 className="text-5xl md:text-7xl font-extrabold text-white tracking-tighter leading-tight">
-                DILIP KUMAR A N
-              </h1>
-              <h2 className="text-xl md:text-2xl font-medium text-indigo-400 tracking-tight">
-                Electronics and Embedded Systems Engineer
-              </h2>
+            <div className="space-y-6 animate-fade-in-up">
+              <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-zinc-900/50 border border-emerald-500/30 backdrop-blur-md w-fit hover:bg-zinc-800/80 transition-colors">
+                <span className="relative flex h-2.5 w-2.5">
+                  <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
+                  <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-emerald-500"></span>
+                </span>
+                <span className="text-emerald-400 text-sm font-medium tracking-wide">Available for Software & Embedded Roles</span>
+              </div>
+              
+              <div className="space-y-3">
+                <h1 className="text-5xl md:text-7xl font-extrabold text-white tracking-tighter leading-tight drop-shadow-lg">
+                  DILIP KUMAR A N
+                </h1>
+                <h2 className="text-xl md:text-2xl font-medium text-indigo-400 tracking-tight">
+                  Electronics and Embedded Systems Engineer
+                </h2>
+              </div>
+
+              <p className="text-lg md:text-xl text-zinc-400 max-w-xl leading-relaxed pt-2">
+                Engineering graduate with industry experience, seeking a challenging role to apply technical and problem-solving skills while growing in the field of electronics, embedded systems, and software development.
+              </p>
+
+              <div className="flex flex-wrap items-center gap-5 pt-6">
+                <a href="/Dilip_Kumar_CV.pdf" download="Dilip_Kumar_CV.pdf" className="h-12 px-8 rounded-xl bg-indigo-500 text-white font-bold flex items-center gap-2 hover:bg-indigo-400 hover:-translate-y-1 active:scale-95 transition-all duration-300 shadow-[0_0_20px_rgba(99,102,241,0.3)]">
+                  <Download size={18} /> Download CV
+                </a>
+                <a href="#contact" className="h-12 px-8 rounded-xl bg-zinc-100 text-zinc-950 font-bold flex items-center gap-2 hover:bg-white hover:-translate-y-1 active:scale-95 transition-all duration-300 shadow-[0_0_20px_rgba(255,255,255,0.2)]">
+                  <Mail size={18} /> Get in Touch
+                </a>
+              </div>
             </div>
 
-            <p className="text-lg md:text-xl text-zinc-400 max-w-3xl leading-relaxed pt-2">
-              Engineering graduate with industry experience, seeking a challenging role to apply technical and problem-solving skills while growing in the field of electronics, embedded systems, and software development.
-            </p>
-
-            <div className="flex flex-wrap items-center gap-5 pt-6">
-              <a href="/Dilip_Kumar_CV.pdf" download="Dilip_Kumar_CV.pdf" className="h-12 px-8 rounded-xl bg-indigo-500 text-white font-bold flex items-center gap-2 hover:bg-indigo-400 hover:scale-105 active:scale-95 transition-all shadow-[0_0_20px_rgba(99,102,241,0.3)]">
-                <Download size={18} /> Download CV
-              </a>
-              <a href="#contact" className="h-12 px-8 rounded-xl bg-zinc-100 text-zinc-950 font-bold flex items-center gap-2 hover:bg-white hover:scale-105 active:scale-95 transition-all shadow-[0_0_20px_rgba(255,255,255,0.2)]">
-                <Mail size={18} /> Get in Touch
-              </a>
-              <a href="https://github.com/dilipgowdaan" target="_blank" rel="noreferrer" className="h-12 px-8 rounded-xl bg-zinc-900/50 backdrop-blur-md border border-zinc-700 text-zinc-100 font-medium flex items-center gap-2 hover:bg-zinc-800 transition-all">
-                <Github size={18} /> GitHub Profile
-              </a>
+            {/* Premium Profile Image Holder */}
+            <div className="hidden md:flex justify-center animate-fade-in-up" style={{ animationDelay: '0.2s' }}>
+              <div className="relative group cursor-default">
+                {/* Glowing Background Blob behind image */}
+                <div className="absolute -inset-2 bg-gradient-to-r from-indigo-500 to-purple-600 rounded-full blur-2xl opacity-40 group-hover:opacity-60 transition duration-1000 group-hover:duration-500 animate-blob"></div>
+                
+                {/* The Image Itself - Save your photo as 'profile.jpg' in the public folder */}
+                <div className="relative w-80 h-80 rounded-full p-2 bg-zinc-900/50 backdrop-blur-xl border border-zinc-700/50 shadow-2xl">
+                  <img 
+                    src="/profile.jpg" 
+                    alt="Dilip Kumar A N" 
+                    className="w-full h-full object-cover rounded-full bg-zinc-800"
+                    onError={(e) => {
+                      // Fallback gradient if profile.jpg is missing
+                      e.target.style.display = 'none';
+                      e.target.nextSibling.style.display = 'flex';
+                    }}
+                  />
+                  {/* Fallback Initial block if image is missing */}
+                  <div className="hidden w-full h-full rounded-full items-center justify-center bg-gradient-to-br from-indigo-900/50 to-purple-900/50 text-6xl font-bold text-zinc-300 border border-zinc-700/50">
+                    DK
+                  </div>
+                </div>
+              </div>
             </div>
+
           </div>
         </section>
 
         <section id="experience" className="w-full max-w-5xl mx-auto px-6 py-16 scroll-mt-[72px]">
           <div className="animate-fade-in-up w-full">
             <SectionLabel text="Professional Experience" icon={Briefcase} delay="0.1s" />
-            <div className="bg-zinc-900/40 backdrop-blur-xl border border-zinc-700/50 rounded-3xl p-8 md:p-12 shadow-2xl relative overflow-hidden group">
-              <div className="absolute top-0 right-0 p-12 opacity-5 pointer-events-none group-hover:scale-110 transition-transform duration-700">
+            <div className="bg-zinc-900/40 backdrop-blur-xl border border-zinc-700/50 rounded-3xl p-8 md:p-12 shadow-2xl relative overflow-hidden group hover:border-zinc-500/50 transition-colors duration-500">
+              <div className="absolute top-0 right-0 p-12 opacity-5 pointer-events-none group-hover:scale-110 group-hover:opacity-10 transition-all duration-700">
                 <Monitor size={150} className="text-indigo-500" />
               </div>
               <div className="relative z-10 flex flex-col md:flex-row md:items-center justify-between gap-6 mb-8">
@@ -349,9 +381,9 @@ export default function App() {
                 <span className="px-4 py-1.5 text-sm font-medium rounded-lg border bg-zinc-800/80 border-zinc-700/50 text-zinc-300 w-fit backdrop-blur-sm">Mar 2022 — Dec 2023</span>
               </div>
               <ul className="relative z-10 space-y-5 max-w-4xl text-zinc-400 text-lg">
-                <li className="flex items-start"><ChevronRight size={20} className="text-indigo-400 mr-4 mt-1 shrink-0" /> Diagnosed and resolved system-level hardware and software issues across desktops and networks.</li>
-                <li className="flex items-start"><ChevronRight size={20} className="text-indigo-400 mr-4 mt-1 shrink-0" /> Automated troubleshooting workflows and improved overall system reliability.</li>
-                <li className="flex items-start"><ChevronRight size={20} className="text-indigo-400 mr-4 mt-1 shrink-0" /> Worked extensively with low-level hardware and software interaction, debugging OS and drivers.</li>
+                <li className="flex items-start group/item"><ChevronRight size={20} className="text-indigo-500/50 group-hover/item:text-indigo-400 transition-colors mr-4 mt-1 shrink-0" /> Diagnosed and resolved system-level hardware and software issues across desktops and networks.</li>
+                <li className="flex items-start group/item"><ChevronRight size={20} className="text-indigo-500/50 group-hover/item:text-indigo-400 transition-colors mr-4 mt-1 shrink-0" /> Automated troubleshooting workflows and improved overall system reliability.</li>
+                <li className="flex items-start group/item"><ChevronRight size={20} className="text-indigo-500/50 group-hover/item:text-indigo-400 transition-colors mr-4 mt-1 shrink-0" /> Worked extensively with low-level hardware and software interaction, debugging OS and drivers.</li>
               </ul>
             </div>
           </div>
@@ -376,7 +408,7 @@ export default function App() {
         <section id="skills" className="w-full max-w-6xl mx-auto px-6 py-16 space-y-16 scroll-mt-[72px]">
           <div className="animate-fade-in-up">
             <SectionLabel text="Technical Competencies" icon={Terminal} delay="0.1s" />
-            <div className="bg-zinc-900/40 backdrop-blur-xl border border-zinc-700/50 rounded-3xl p-8 md:p-12 shadow-2xl">
+            <div className="bg-zinc-900/40 backdrop-blur-xl border border-zinc-700/50 rounded-3xl p-8 md:p-12 shadow-2xl hover:border-zinc-500/50 transition-colors duration-500">
               <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-10">
                 <div>
                   <h3 className="text-sm font-semibold text-zinc-200 uppercase tracking-widest mb-5 flex items-center gap-3">
@@ -384,7 +416,7 @@ export default function App() {
                   </h3>
                   <div className="flex flex-wrap gap-2.5">
                     {['React', 'React Native', 'C', 'Python', 'HTML', 'SQL'].map(s => (
-                      <span key={s} className="px-3 py-1.5 text-xs font-medium rounded-md border bg-zinc-900/80 border-zinc-700/80 text-zinc-300">{s}</span>
+                      <span key={s} className="px-3 py-1.5 text-xs font-medium rounded-md border bg-zinc-900/80 border-zinc-700/80 text-zinc-300 hover:bg-indigo-500/10 hover:text-indigo-300 hover:border-indigo-500/50 transition-colors cursor-default">{s}</span>
                     ))}
                   </div>
                 </div>
@@ -394,7 +426,7 @@ export default function App() {
                   </h3>
                   <div className="flex flex-wrap gap-2.5">
                     {['Firebase', 'Vercel', 'Supabase', 'Flask', 'Expo', 'VS Code', 'Arduino IDE', 'MATLAB'].map(s => (
-                      <span key={s} className="px-3 py-1.5 text-xs font-medium rounded-md border bg-zinc-900/80 border-zinc-700/80 text-zinc-300">{s}</span>
+                      <span key={s} className="px-3 py-1.5 text-xs font-medium rounded-md border bg-zinc-900/80 border-zinc-700/80 text-zinc-300 hover:bg-cyan-500/10 hover:text-cyan-300 hover:border-cyan-500/50 transition-colors cursor-default">{s}</span>
                     ))}
                   </div>
                 </div>
@@ -404,7 +436,7 @@ export default function App() {
                   </h3>
                   <div className="flex flex-wrap gap-2.5">
                     {['Verilog', 'System Verilog', 'FPGA Boards', 'Raspberry Pi', 'Arduino Uno', 'ESP8266/ESP32'].map(s => (
-                      <span key={s} className="px-3 py-1.5 text-xs font-medium rounded-md border bg-zinc-900/80 border-zinc-700/80 text-zinc-300">{s}</span>
+                      <span key={s} className="px-3 py-1.5 text-xs font-medium rounded-md border bg-zinc-900/80 border-zinc-700/80 text-zinc-300 hover:bg-emerald-500/10 hover:text-emerald-300 hover:border-emerald-500/50 transition-colors cursor-default">{s}</span>
                     ))}
                   </div>
                 </div>
@@ -427,7 +459,7 @@ export default function App() {
                     <p className="text-zinc-400 mt-1">{edu.inst}</p>
                   </div>
                   <div className="mt-4 md:mt-0 flex items-center gap-6">
-                    <span className="px-3 py-1.5 rounded-lg bg-zinc-900/80 border border-zinc-700/50 text-zinc-300 font-mono text-sm shadow-inner group-hover:border-zinc-500/50 transition-colors">
+                    <span className="px-3 py-1.5 rounded-lg bg-zinc-900/80 border border-zinc-700/50 text-zinc-300 font-mono text-sm shadow-inner group-hover:border-indigo-500/50 transition-colors">
                       {edu.score}
                     </span>
                     <span className="text-zinc-500 font-mono text-sm w-12 text-right">{edu.year}</span>
@@ -439,7 +471,7 @@ export default function App() {
         </section>
 
         <section id="contact" className="w-full max-w-3xl mx-auto px-6 py-16 scroll-mt-[72px]">
-          <div className="bg-zinc-900/40 backdrop-blur-xl border border-zinc-700/50 rounded-3xl p-8 md:p-12 shadow-2xl relative overflow-hidden animate-fade-in-up">
+          <div className="bg-zinc-900/40 backdrop-blur-xl border border-zinc-700/50 rounded-3xl p-8 md:p-12 shadow-2xl relative overflow-hidden animate-fade-in-up hover:border-zinc-500/50 transition-colors duration-500">
             <div className="absolute top-0 right-0 p-12 opacity-5 pointer-events-none">
               <Mail size={200} className="text-indigo-500" />
             </div>
@@ -473,7 +505,7 @@ export default function App() {
               </div>
               <button 
                 type="submit" disabled={submitStatus === 'submitting'}
-                className="w-full md:w-auto px-10 py-3 bg-indigo-500 hover:bg-indigo-600 text-white font-bold rounded-xl transition-all shadow-[0_0_20px_rgba(99,102,241,0.3)] hover:scale-105 active:scale-95 disabled:opacity-50 disabled:hover:scale-100 flex items-center justify-center gap-2 mt-4"
+                className="w-full md:w-auto px-10 py-3 bg-indigo-500 hover:bg-indigo-600 text-white font-bold rounded-xl transition-all shadow-[0_0_20px_rgba(99,102,241,0.3)] hover:-translate-y-1 active:scale-95 disabled:opacity-50 disabled:hover:translate-y-0 flex items-center justify-center gap-2 mt-4"
               >
                 {submitStatus === 'idle' && <><Send size={18} /> Send Message</>}
                 {submitStatus === 'submitting' && 'Transmitting...'}
@@ -486,23 +518,22 @@ export default function App() {
 
       </main>
 
-      <footer className="fixed bottom-0 left-0 right-0 z-50 border-t border-zinc-800/80 bg-[#050505]/95 backdrop-blur-xl w-full h-[40px] flex items-center text-[11px] md:text-xs text-zinc-500 px-6">
+      <footer className="fixed bottom-0 left-0 right-0 z-50 border-t border-zinc-800/80 bg-[#050505]/95 backdrop-blur-xl w-full h-[72px] flex items-center text-xs md:text-sm text-zinc-400 px-6">
         <div className="max-w-6xl mx-auto flex justify-between items-center w-full">
           
           <div className="flex items-center gap-2">
-            <span className="font-bold text-zinc-300">Dilip Kumar A N</span>
+            <span className="font-bold text-zinc-200">Dilip Kumar A N</span>
+            <span className="hidden sm:inline text-zinc-600">•</span>
+            <span className="hidden sm:inline">© {new Date().getFullYear()}</span>
           </div>
 
           <div className="font-mono flex items-center gap-2">
-            <span className="hidden sm:inline">{new Date().getFullYear()}</span>
-            <span className="hidden sm:inline">•</span>
-            <a href="mailto:dilipgowda7259@gmail.com" className="hover:text-white transition-colors">dilipgowda7259@gmail.com</a>
+            <a href="mailto:contact@dilipgowda.xyz" className="hover:text-white transition-colors">contact@dilipgowda.xyz</a>
           </div>
           
           <div className="flex gap-4 items-center">
-            <a href="https://github.com/dilipgowdaan" target="_blank" rel="noreferrer" className="hover:text-white transition-colors"><Github size={14} /></a>
-            <a href="https://linkedin.com/in/dilipkumaran" target="_blank" rel="noreferrer" className="hover:text-white transition-colors"><Linkedin size={14} /></a>
-            <a href="#contact" className="hover:text-indigo-400 transition-colors"><Mail size={14} /></a>
+            <a href="https://github.com/dilipgowdaan" target="_blank" rel="noreferrer" className="hover:text-white transition-colors"><Github size={16} /></a>
+            <a href="https://linkedin.com/in/dilipkumaran" target="_blank" rel="noreferrer" className="hover:text-white transition-colors"><Linkedin size={16} /></a>
           </div>
 
         </div>
