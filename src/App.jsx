@@ -5,7 +5,7 @@ import {
   ChevronRight, Send, CheckCircle, XCircle, Download,
   Database, Smartphone, Server, Briefcase, Code,
   Trophy, Gamepad2, Activity, Medal,
-  Rocket, Car, Telescope, Lightbulb, Microscope
+  Rocket, Car, Globe, Lightbulb, Microscope, ExternalLink
 } from 'lucide-react';
 
 // --- DATA STRUCTURES ---
@@ -15,6 +15,7 @@ const softwareProjects = [
     title: "VaidyaMithra - Hospital Management",
     icon: Database,
     tags: ["React", "Firebase", "LLMs", "Vercel"],
+    url: "https://vaidya-mithra-app.vercel.app/",
     desc: "A complete Hospital Management System featuring an AI-powered health assistant that analyzes symptoms. Implemented secure cloud architecture and real-time status updates.",
     images: [
       "https://images.unsplash.com/photo-1576091160550-2173ff9e5ee5?q=80&w=800&auto=format&fit=crop",
@@ -26,6 +27,7 @@ const softwareProjects = [
     title: "NAMMA RAITHA - Agri-Marketplace",
     icon: Server,
     tags: ["Full-Stack", "Leaflet.js", "SQL"],
+    url: "https://nammaraitha.vercel.app/",
     desc: "Hyper-Local Agri-Marketplace connecting farmers and buyers. Integrated dynamic CRUD, geolocation search, and automated stock updates with multi-language support.",
     images: [
       "https://images.unsplash.com/photo-1622383563227-04401ab4e5ea?q=80&w=800&auto=format&fit=crop",
@@ -51,6 +53,7 @@ const hardwareProjects = [
     title: "Solar Enerlytics",
     icon: Zap,
     tags: ["Hardware", "Supabase", "React"],
+    url: "https://solarenerlytics.vercel.app/",
     desc: "Grid integrated PV System with Weather Forecast Analysis. Hardware-integrated production grade system managed via a full-stack Vercel hosted dashboard and mobile app.",
     images: [
       "https://images.unsplash.com/photo-1509391366360-1e97d5259d81?q=80&w=800&auto=format&fit=crop",
@@ -106,11 +109,19 @@ const ProjectCard = ({ project, isHovered, onMouseEnter, onMouseLeave }) => {
     return () => clearInterval(interval);
   }, [isHovered, project.images.length]);
 
+  const handleClick = () => {
+    if (project.url) {
+      window.open(project.url, '_blank', 'noopener,noreferrer');
+    }
+  };
+
   return (
     <div 
+      onClick={handleClick}
       onMouseEnter={onMouseEnter}
       onMouseLeave={onMouseLeave}
-      className={`relative overflow-hidden transition-all duration-700 ease-[cubic-bezier(0.25,1,0.5,1)] flex flex-col bg-zinc-900/50 backdrop-blur-xl border border-zinc-700/50 rounded-2xl cursor-pointer group shadow-lg min-h-[350px] md:min-h-[400px] hover:-translate-y-2 hover:shadow-[0_15px_40px_-10px_rgba(0,0,0,0.5)]
+      className={`relative overflow-hidden transition-all duration-700 ease-[cubic-bezier(0.25,1,0.5,1)] flex flex-col bg-zinc-900/50 backdrop-blur-xl border border-zinc-700/50 rounded-2xl group shadow-lg min-h-[350px] md:min-h-[400px] hover:-translate-y-2 hover:shadow-[0_15px_40px_-10px_rgba(0,0,0,0.5)]
+        ${project.url ? 'cursor-pointer' : 'cursor-default'}
         ${isHovered ? 'md:flex-[2.5] border-indigo-500/50 shadow-[0_8px_40px_-12px_rgba(99,102,241,0.2)]' : 'md:flex-1 hover:border-zinc-500/50'}`
       }
     >
@@ -120,33 +131,34 @@ const ProjectCard = ({ project, isHovered, onMouseEnter, onMouseLeave }) => {
             key={i}
             src={img} 
             alt="Project"
-            className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-1000 ease-in-out ${i === imgIdx ? (isHovered ? 'opacity-40 scale-105' : 'opacity-20 scale-100') : 'opacity-0 scale-100'}`}
+            className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-1000 ease-in-out ${i === imgIdx ? (isHovered ? 'opacity-40 scale-105' : 'opacity-40 md:opacity-20 scale-105 md:scale-100') : 'opacity-0 scale-100'}`}
           />
         ))}
         <div className="absolute inset-0 bg-gradient-to-t from-[#050505] via-[#050505]/70 to-transparent" />
-        <div className={`absolute inset-0 transition-opacity duration-700 ${isHovered ? 'opacity-0' : 'opacity-40 bg-[#050505]/30'}`} />
+        <div className={`absolute inset-0 transition-opacity duration-700 ${isHovered ? 'opacity-0' : 'opacity-0 md:opacity-40 bg-[#050505]/30'}`} />
       </div>
 
       <div className="relative z-10 flex flex-col justify-end h-full p-6 md:p-8">
-        <div className={`transition-all duration-700 transform ${isHovered ? 'translate-y-0 opacity-100' : 'md:translate-y-4'}`}>
+        <div className={`transition-all duration-700 transform ${isHovered ? 'translate-y-0 opacity-100' : 'translate-y-0 md:translate-y-4 opacity-100'}`}>
           <div className="flex items-center gap-3 mb-4">
-            <div className={`p-2.5 rounded-xl border transition-colors duration-500 ${isHovered ? 'bg-indigo-500/20 border-indigo-500/40 text-indigo-400 scale-110 shadow-[0_0_15px_rgba(99,102,241,0.3)]' : 'bg-zinc-800/80 border-zinc-700 text-zinc-400'}`}>
+            <div className={`p-2.5 rounded-xl border transition-colors duration-500 ${isHovered ? 'bg-indigo-500/20 border-indigo-500/40 text-indigo-400 scale-110 shadow-[0_0_15px_rgba(99,102,241,0.3)]' : 'bg-indigo-500/20 md:bg-zinc-800/80 border-indigo-500/40 md:border-zinc-700 text-indigo-400 md:text-zinc-400 scale-110 md:scale-100'}`}>
               <project.icon size={20} />
             </div>
             <div className="flex flex-wrap gap-2">
               {project.tags.map(t => (
-                <span key={t} className={`text-[10px] font-mono font-semibold px-2 py-1 rounded-md border transition-all duration-500 ${isHovered ? 'bg-indigo-900/30 text-indigo-200 border-indigo-500/30 translate-y-0' : 'bg-zinc-800/80 text-zinc-400 border-zinc-700'}`}>
+                <span key={t} className={`text-[10px] font-mono font-semibold px-2 py-1 rounded-md border transition-all duration-500 ${isHovered ? 'bg-indigo-900/30 text-indigo-200 border-indigo-500/30 translate-y-0' : 'bg-indigo-900/30 md:bg-zinc-800/80 text-indigo-200 md:text-zinc-400 border-indigo-500/30 md:border-zinc-700 translate-y-0'}`}>
                   {t}
                 </span>
               ))}
             </div>
           </div>
           
-          <h3 className={`font-bold transition-all duration-500 mb-3 ${isHovered ? 'text-2xl text-white' : 'text-xl text-zinc-200 md:truncate'}`}>
+          <h3 className={`font-bold transition-all duration-500 mb-3 flex items-center gap-2 ${isHovered ? 'text-2xl text-white' : 'text-2xl md:text-xl text-white md:text-zinc-200 md:truncate whitespace-normal'}`}>
             {project.title}
+            {project.url && <ExternalLink size={18} className={`text-indigo-400 transition-opacity duration-500 ${isHovered ? 'opacity-100' : 'opacity-100 md:opacity-0'}`} />}
           </h3>
           
-          <div className={`grid transition-all duration-700 ease-in-out ${isHovered ? 'grid-rows-[1fr] opacity-100 mt-2' : 'grid-rows-[0fr] opacity-0 md:opacity-0 opacity-100 grid-rows-[1fr] md:grid-rows-[0fr]'}`}>
+          <div className={`grid transition-all duration-700 ease-in-out ${isHovered ? 'grid-rows-[1fr] opacity-100 mt-2' : 'grid-rows-[1fr] md:grid-rows-[0fr] opacity-100 md:opacity-0 mt-2 md:mt-0'}`}>
             <div className="overflow-hidden">
               <p className="text-zinc-300 text-sm md:text-base leading-relaxed">
                 {project.desc}
@@ -523,9 +535,9 @@ export default function App() {
                       <Car size={18} className="text-orange-400 group-hover:translate-x-2 transition-transform duration-300" /> Formula 1 & Motorsport
                     </div>
 
-                    {/* Telescope tilts and zooms */}
+                    {/* Globe tilts and zooms */}
                     <div className="px-5 py-3 rounded-xl bg-zinc-800/80 border border-zinc-700/50 text-zinc-200 text-sm font-medium flex items-center gap-3 hover:border-purple-500/50 hover:bg-purple-500/10 hover:-translate-y-1 hover:shadow-[0_5px_15px_rgba(168,85,247,0.15)] transition-all cursor-default group">
-                      <Telescope size={18} className="text-purple-400 group-hover:-rotate-12 group-hover:scale-110 transition-transform duration-300" /> Astronomy & Space
+                      <Globe size={18} className="text-purple-400 group-hover:-rotate-12 group-hover:scale-110 transition-transform duration-300" /> Astronomy & Space
                     </div>
 
                     {/* Lightbulb glows and pops */}
