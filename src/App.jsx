@@ -3,8 +3,11 @@ import {
   Github, Linkedin, Mail, MapPin, 
   Terminal, Cpu, Monitor, Zap, GraduationCap, 
   ChevronRight, Send, CheckCircle, XCircle, Download,
-  Database, Smartphone, Server, Briefcase, Code
+  Database, Smartphone, Server, Briefcase, Code,
+  Trophy, Gamepad2, Activity, Medal
 } from 'lucide-react';
+
+// --- DATA STRUCTURES ---
 
 const softwareProjects = [
   {
@@ -120,7 +123,6 @@ const ProjectCard = ({ project, isHovered, onMouseEnter, onMouseLeave }) => {
           />
         ))}
         <div className="absolute inset-0 bg-gradient-to-t from-[#050505] via-[#050505]/70 to-transparent" />
-        {/* Significantly reduced background darkness to make images more visible */}
         <div className={`absolute inset-0 transition-opacity duration-700 ${isHovered ? 'opacity-0' : 'opacity-40 bg-[#050505]/30'}`} />
       </div>
 
@@ -206,9 +208,10 @@ export default function App() {
     e.preventDefault();
     setSubmitStatus('submitting');
     
-    const serviceId = import.meta.env.VITE_EMAILJS_SERVICE_ID; 
-    const templateId = import.meta.env.VITE_EMAILJS_TEMPLATE_ID;
-    const publicKey = import.meta.env.VITE_EMAILJS_PUBLIC_KEY;
+    // Using hardcoded keys to prevent build compilation warnings in this environment
+    const serviceId = 'service_bvptl1g'; 
+    const templateId = 'template_q9d2t3t';
+    const publicKey = 'jMeHyyiKaYCLnBG4o';
 
     if (!serviceId || !templateId || !publicKey) {
       console.error("EmailJS Environment variables are missing!");
@@ -253,9 +256,9 @@ export default function App() {
   ];
 
   return (
-    // Perfect framing: pb-[72px] guarantees content never hides behind the 72px footer
     <div className="min-h-screen bg-[#050505] text-zinc-300 font-sans selection:bg-indigo-500/30 selection:text-indigo-200 relative pb-[72px] custom-scrollbar">
       
+      {/* Background Orbs & Effects */}
       <div className="fixed inset-0 z-0 pointer-events-none">
         <div className="absolute top-[-10%] left-[-10%] w-[500px] h-[500px] bg-indigo-600/20 rounded-full mix-blend-screen filter blur-[100px] opacity-50 animate-blob" style={{ transform: `translate(${mousePosition.x}px, ${mousePosition.y}px)` }} />
         <div className="absolute top-[20%] right-[-10%] w-[400px] h-[400px] bg-emerald-600/10 rounded-full mix-blend-screen filter blur-[100px] opacity-50 animate-blob animation-delay-2000" style={{ transform: `translate(${-mousePosition.x}px, ${-mousePosition.y}px)` }} />
@@ -263,6 +266,7 @@ export default function App() {
         <div className="absolute inset-0 bg-[url('https://grainy-gradients.vercel.app/noise.svg')] opacity-20 mix-blend-overlay"></div>
       </div>
 
+      {/* --- HEADER --- */}
       <header className="fixed top-0 left-0 right-0 z-50 bg-[#050505]/90 backdrop-blur-xl border-b border-zinc-800/80 shadow-lg py-4 px-6 h-[72px]">
         <div className="max-w-6xl mx-auto flex items-center justify-between h-full">
           <a href="#home" className="flex items-center gap-3 cursor-pointer group focus:outline-none">
@@ -300,12 +304,14 @@ export default function App() {
         </div>
       </header>
 
+      {/* --- MAIN CONTENT --- */}
       <main className="relative z-10 w-full pt-[72px] flex flex-col items-center">
         
+        {/* HERO SECTION */}
         <section id="home" className="w-full max-w-6xl mx-auto px-6 pt-16 pb-20 scroll-mt-[72px]">
-          <div className="grid md:grid-cols-2 gap-12 items-center">
+          <div className="grid md:grid-cols-12 gap-8 lg:gap-12 items-center w-full">
             
-            <div className="space-y-6 animate-fade-in-up">
+            <div className="md:col-span-7 lg:col-span-7 space-y-6 animate-fade-in-up">
               <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-zinc-900/50 border border-emerald-500/30 backdrop-blur-md w-fit hover:bg-zinc-800/80 transition-colors">
                 <span className="relative flex h-2.5 w-2.5">
                   <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
@@ -323,39 +329,39 @@ export default function App() {
                 </h2>
               </div>
 
-              <p className="text-lg md:text-xl text-zinc-400 max-w-xl leading-relaxed pt-2">
+              <p className="text-lg md:text-xl text-zinc-400 leading-relaxed pt-2">
                 Engineering graduate with industry experience, seeking a challenging role to apply technical and problem-solving skills while growing in the field of electronics, embedded systems, and software development.
               </p>
 
-              <div className="flex flex-wrap items-center gap-5 pt-6">
-                <a href="/Dilip_Kumar_CV.pdf" download="Dilip_Kumar_CV.pdf" className="h-12 px-8 rounded-xl bg-indigo-500 text-white font-bold flex items-center gap-2 hover:bg-indigo-400 hover:-translate-y-1 active:scale-95 transition-all duration-300 shadow-[0_0_20px_rgba(99,102,241,0.3)]">
+              {/* Call To Action Buttons (CV, Contact, GitHub) */}
+              <div className="flex flex-wrap items-center gap-4 pt-6">
+                <a href="/Dilip_Kumar_CV.pdf" download="Dilip_Kumar_CV.pdf" className="h-12 px-7 rounded-xl bg-indigo-500 text-white font-bold flex items-center gap-2 hover:bg-indigo-400 hover:-translate-y-1 active:scale-95 transition-all duration-300 shadow-[0_0_20px_rgba(99,102,241,0.3)]">
                   <Download size={18} /> Download CV
                 </a>
-                <a href="#contact" className="h-12 px-8 rounded-xl bg-zinc-100 text-zinc-950 font-bold flex items-center gap-2 hover:bg-white hover:-translate-y-1 active:scale-95 transition-all duration-300 shadow-[0_0_20px_rgba(255,255,255,0.2)]">
+                <a href="#contact" className="h-12 px-7 rounded-xl bg-zinc-100 text-zinc-950 font-bold flex items-center gap-2 hover:bg-white hover:-translate-y-1 active:scale-95 transition-all duration-300 shadow-[0_0_20px_rgba(255,255,255,0.2)]">
                   <Mail size={18} /> Get in Touch
+                </a>
+                <a href="https://github.com/dilipgowdaan" target="_blank" rel="noreferrer" className="h-12 px-7 rounded-xl bg-zinc-900/50 backdrop-blur-md border border-zinc-700 text-zinc-100 font-medium flex items-center gap-2 hover:bg-zinc-800 hover:-translate-y-1 active:scale-95 transition-all duration-300 shadow-[0_4px_15px_rgba(0,0,0,0.3)]">
+                  <Github size={18} /> GitHub Profile
                 </a>
               </div>
             </div>
 
-            {/* Premium Profile Image Holder */}
-            <div className="hidden md:flex justify-center animate-fade-in-up" style={{ animationDelay: '0.2s' }}>
+            {/* Profile Image Holder */}
+            <div className="hidden md:flex md:col-span-5 lg:col-span-5 justify-end animate-fade-in-up" style={{ animationDelay: '0.2s' }}>
               <div className="relative group cursor-default">
-                {/* Glowing Background Blob behind image */}
                 <div className="absolute -inset-2 bg-gradient-to-r from-indigo-500 to-purple-600 rounded-full blur-2xl opacity-40 group-hover:opacity-60 transition duration-1000 group-hover:duration-500 animate-blob"></div>
                 
-                {/* The Image Itself - Save your photo as 'profile.jpg' in the public folder */}
                 <div className="relative w-80 h-80 rounded-full p-2 bg-zinc-900/50 backdrop-blur-xl border border-zinc-700/50 shadow-2xl">
                   <img 
                     src="/profile.jpg" 
                     alt="Dilip Kumar A N" 
                     className="w-full h-full object-cover rounded-full bg-zinc-800"
                     onError={(e) => {
-                      // Fallback gradient if profile.jpg is missing
                       e.target.style.display = 'none';
                       e.target.nextSibling.style.display = 'flex';
                     }}
                   />
-                  {/* Fallback Initial block if image is missing */}
                   <div className="hidden w-full h-full rounded-full items-center justify-center bg-gradient-to-br from-indigo-900/50 to-purple-900/50 text-6xl font-bold text-zinc-300 border border-zinc-700/50">
                     DK
                   </div>
@@ -366,6 +372,7 @@ export default function App() {
           </div>
         </section>
 
+        {/* EXPERIENCE SECTION */}
         <section id="experience" className="w-full max-w-5xl mx-auto px-6 py-16 scroll-mt-[72px]">
           <div className="animate-fade-in-up w-full">
             <SectionLabel text="Professional Experience" icon={Briefcase} delay="0.1s" />
@@ -389,6 +396,7 @@ export default function App() {
           </div>
         </section>
 
+        {/* PROJECTS SECTION */}
         <section id="projects" className="w-full max-w-7xl mx-auto px-6 py-16 space-y-16 scroll-mt-[72px]">
           <div>
             <SectionLabel text="Software & Full-Stack Projects" icon={Code} delay="0.1s" />
@@ -405,7 +413,9 @@ export default function App() {
           </div>
         </section>
 
+        {/* SKILLS & EDUCATION SECTION */}
         <section id="skills" className="w-full max-w-6xl mx-auto px-6 py-16 space-y-16 scroll-mt-[72px]">
+          
           <div className="animate-fade-in-up">
             <SectionLabel text="Technical Competencies" icon={Terminal} delay="0.1s" />
             <div className="bg-zinc-900/40 backdrop-blur-xl border border-zinc-700/50 rounded-3xl p-8 md:p-12 shadow-2xl hover:border-zinc-500/50 transition-colors duration-500">
@@ -444,6 +454,7 @@ export default function App() {
             </div>
           </div>
 
+          {/* EDUCATION SECTION */}
           <div className="animate-fade-in-up" style={{ animationDelay: '0.2s' }}>
             <SectionLabel text="Education" icon={GraduationCap} />
             <div className="bg-zinc-900/40 backdrop-blur-xl border border-zinc-700/50 rounded-3xl p-8 md:p-10 shadow-2xl space-y-2">
@@ -468,8 +479,47 @@ export default function App() {
               ))}
             </div>
           </div>
+
+          {/* ACHIEVEMENTS & BEYOND ACADEMICS */}
+          <div className="grid md:grid-cols-2 gap-10 mt-16 animate-fade-in-up" style={{ animationDelay: '0.4s' }}>
+            {/* Achievements */}
+            <div>
+              <SectionLabel text="Achievements & Awards" icon={Trophy} />
+              <div className="bg-zinc-900/40 backdrop-blur-xl border border-zinc-700/50 rounded-3xl p-8 shadow-2xl relative overflow-hidden group hover:border-zinc-500/50 transition-colors duration-500 h-full">
+                <div className="absolute top-0 right-0 p-8 opacity-5 pointer-events-none group-hover:scale-110 group-hover:opacity-10 transition-all duration-700">
+                  <Medal size={120} className="text-yellow-500" />
+                </div>
+                <ul className="relative z-10 space-y-5 text-zinc-300">
+                  <li className="flex items-start group/item">
+                    <Trophy size={20} className="text-yellow-500/70 group-hover/item:text-yellow-400 transition-colors mr-4 mt-1 shrink-0" /> 
+                    <span className="leading-relaxed"><strong>Second Place</strong> in The Major Project Showcase held at RVCE for <em>"Solar Enerlytics: A Grid Integrated PV System with Weather Forecast Analysis"</em>.</span>
+                  </li>
+                </ul>
+              </div>
+            </div>
+
+            {/* Beyond Academics (Interests) */}
+            <div>
+              <SectionLabel text="Beyond Academics" icon={Gamepad2} />
+              <div className="bg-zinc-900/40 backdrop-blur-xl border border-zinc-700/50 rounded-3xl p-8 shadow-2xl relative overflow-hidden group hover:border-zinc-500/50 transition-colors duration-500 h-full">
+                 <div className="flex flex-wrap gap-4 relative z-10">
+                    <div className="px-5 py-3 rounded-xl bg-zinc-800/80 border border-zinc-700/50 text-zinc-200 font-medium flex items-center gap-3 hover:border-emerald-500/50 hover:bg-emerald-500/10 transition-all cursor-default">
+                      <Activity size={18} className="text-emerald-400" /> Cricket
+                    </div>
+                    <div className="px-5 py-3 rounded-xl bg-zinc-800/80 border border-zinc-700/50 text-zinc-200 font-medium flex items-center gap-3 hover:border-indigo-500/50 hover:bg-indigo-500/10 transition-all cursor-default">
+                      <Gamepad2 size={18} className="text-indigo-400" /> Mobile Games
+                    </div>
+                    <div className="px-5 py-3 rounded-xl bg-zinc-800/80 border border-zinc-700/50 text-zinc-200 font-medium flex items-center gap-3 hover:border-cyan-500/50 hover:bg-cyan-500/10 transition-all cursor-default">
+                      <Code size={18} className="text-cyan-400" /> Coding & Technology
+                    </div>
+                 </div>
+              </div>
+            </div>
+          </div>
+
         </section>
 
+        {/* CONTACT SECTION */}
         <section id="contact" className="w-full max-w-3xl mx-auto px-6 py-16 scroll-mt-[72px]">
           <div className="bg-zinc-900/40 backdrop-blur-xl border border-zinc-700/50 rounded-3xl p-8 md:p-12 shadow-2xl relative overflow-hidden animate-fade-in-up hover:border-zinc-500/50 transition-colors duration-500">
             <div className="absolute top-0 right-0 p-12 opacity-5 pointer-events-none">
@@ -518,6 +568,7 @@ export default function App() {
 
       </main>
 
+      {/* --- FOOTER --- */}
       <footer className="fixed bottom-0 left-0 right-0 z-50 border-t border-zinc-800/80 bg-[#050505]/95 backdrop-blur-xl w-full h-[72px] flex items-center text-xs md:text-sm text-zinc-400 px-6">
         <div className="max-w-6xl mx-auto flex justify-between items-center w-full">
           
@@ -534,6 +585,7 @@ export default function App() {
           <div className="flex gap-4 items-center">
             <a href="https://github.com/dilipgowdaan" target="_blank" rel="noreferrer" className="hover:text-white transition-colors"><Github size={16} /></a>
             <a href="https://linkedin.com/in/dilipkumaran" target="_blank" rel="noreferrer" className="hover:text-white transition-colors"><Linkedin size={16} /></a>
+            <a href="#contact" className="hover:text-indigo-400 transition-colors"><Mail size={16} /></a>
           </div>
 
         </div>
